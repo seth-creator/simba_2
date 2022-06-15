@@ -1,0 +1,42 @@
+
+{% load static %}
+{% load bootstrap5 %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0" nonce="tPOLq595"></script>
+
+<head>
+  <title>Your Website Title</title>
+  <!-- You can use Open Graph tags to customize link previews.
+  Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+  <meta property="og:url"           content="http://192.168.1.186/#9/5.9103/-5.7623" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Your Website Title" />
+  <meta property="og:description"   content="Your description" />
+  <meta property="og:image"         content="{%static 'images/favicon.ico'%}" />
+  </head>
+
+<div id="fb-root"></div>
+
+<hr><footer class="footer mt-auto py-3 bg-dark">
+    <div class="container">
+      <span class="text-muted">DATA CONSULTING GROUP</span>
+      <!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your share button code -->
+<span class="fb-share-button" 
+data-href="http://192.168.1.186/#9/5.9103/-5.7623" 
+data-layout="button_count">
+</span>
+<span class="container"><a href="https://twitter.com/intent/tweet?text=http%3A//127.0.0.1%3A8000/2/">Partager sur Twitter</a></span>
+<span   class="container"><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//127.0.0.1%3A8000/%2314/5.3784/-3.9978&title=&summary=&source=">Partager sur LinkedIn</a></span>
+
+    </div>
+  </footer>

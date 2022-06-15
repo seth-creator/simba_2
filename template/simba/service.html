@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+  {% load leaflet_tags %}
+  {% load crispy_forms_tags %}
+  {% load bootstrap5 %}
+  {% load mapbox_location_field_tags %} 
+  <head>
+    
+  {% location_field_includes %}
+  
+  {% leaflet_js %}
+  {% leaflet_css %}
+  {% leaflet_js plugins="forms" %}
+  {% leaflet_css plugins="forms" %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  {% bootstrap_messages %}
+  <script type = "text/javascript" src="{% static 'js/jquery-3.1.0.js' %}"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0" nonce="tPOLq595"></script>
+  </head>
+  <body>
+    {% include 'base/nav.html' %}
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+  
+   <form>
+     {{filter.form}}
+    
+    
+  <button class="btn btn-outline-success" type="submit">Lancer</button>
+     
+  </form>
+  
+   
+
+{% for servi in services %}
+
+
+
+<div class="card text-center">
+    <div class="card-header">
+        {{service.nom}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{servi.secteur}}</h5>
+      <p class="card-text">{{servi.caract1}}</p>
+      <a href="#" class="btn btn-primary">Le lien</a>
+    </div>
+    <div class="card-footer text-muted">
+        {{servi.caract2}}
+    </div>
+  </div>
+
+{% endfor %}
+   
+{% include 'base/footer.html' %}
+  </body>
+</html>

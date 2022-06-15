@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+ {% load static %}
+{% load bootstrap5 %}
+ {% bootstrap_css %}
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>Notes</title>
+ </head>
+ <body>
+   <h1>Notes</h1>
+   {% for note in Notes %}
+   
+       <div class="card text-center">
+  <div class="card-header">
+    Featured
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ note.id }}</h5>
+    <p class="card-text"> {{ note.name }}</p>
+  </div>
+  <div class="card-footer text-muted">
+    2 days ago
+  </div>
+</div>
+       {% for item in Items %}
+       <ul>
+           {% if item.note_id == note %}
+               <li>{{item.item_name}}</li>
+           {% endif %}
+       </ul>
+       {% endfor %}
+       <br>
+   {% endfor %}
+   <br>
+   <form method="post">
+     {% csrf_token %}
+       <div class="form-group">
+         <label for="id_note_name">
+           Note Name
+         </label>
+         <input type="text" class="form-control" id="id_note_name" name="note_name">
+       </div>
+       <br>
+       <button type="submit" class="btn btn-success">
+         Add Note
+       </button>
+   </form>
+   
+   
+ </body>
+</html>

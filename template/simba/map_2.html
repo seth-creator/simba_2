@@ -1,0 +1,1825 @@
+
+{% load static %}
+{% load leaflet_tags %}
+{% load crispy_forms_tags %}
+{% load bootstrap5 %}
+
+<html>
+  <head>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    {% bootstrap_css %}
+    <head><link rel="shortcut icon" type="image/ico" href="{%static 'images/favicon.ico'%}"/></head>
+    <link rel="stylesheet" href = "{% static 'js/MarkerCluster.css' %}"/>
+    <link rel="stylesheet" href = "{% static 'js/MarkerCluster.Default.css' %}"/>
+    <link rel="stylesheet" href = "{% static 'js/leaflet.groupedlayercontrol.css' %}"/>
+    <link rel="stylesheet" href = "{% static 'js/Control.Geocoder.css' %}"/>
+    <link rel="stylesheet" href = "{% static 'js/leaflet-routing-machine.css' %}"/>
+    <link rel="stylesheet" href = "{% static 'css/leaflet-search.css' %}"/>
+    <link rel="stylesheet" href = "{% static 'leaflet/Control.MiniMap.css' %}"/>
+
+    <link rel="stylesheet" href = "{% static 'leaflet/draw/leaflet.draw.css' %}"/>
+
+    <link rel="stylesheet" href = "{% static 'css/L.Control.Locate.min.css' %}"/>
+    <link rel="stylesheet" href = "{% static 'css/leaflet-sidebar.css' %}"/>
+    <link rel="stylesheet" href = "{% static 'css/nouislider.css' %}"/>
+    
+    <script type = "text/javascript" src="{% static 'js/leaflet.markercluster.js' %}"></script>
+
+    <script type = "text/javascript" src="{% static 'js/leaflet.ajax.js' %}"></script>
+
+    <script type = "text/javascript" src="{% static 'js/leaflet-bing-layer.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/leaflet.groupedlayercontrol.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/Control.Geocoder.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/leaflet-routing-machine.js' %}"></script>
+
+    <script type = "text/javascript" src="{% static 'js/leaflet.browser.print.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/leaflet.browser.print.utils.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/leaflet.browser.print.sizes.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/leaflet-search.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/leaflet.buffer.min.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'css/leaflet.buffer.css' %}"></script>
+    <script type = "text/javascript" src="{% static 'css/leaflet.buffer.css' %}"></script>
+
+    <script type = "text/javascript" src="{% static 'js/leaflet.buffer.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'leaflet/Control.MiniMap.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/L.Control.Locate.min.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/leaflet-hash.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/Autolinker.min.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/leaflet-bing-layer.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/jquery-3.1.0.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/leaflet-sidebar.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/nouislider.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'js/turf.min.js' %}"></script>
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0" nonce="32v4EZ5O"></script>
+
+    
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.4/leaflet.markercluster.js'></script>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.4/MarkerCluster.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.4/MarkerCluster.Default.css' rel='stylesheet' />
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/fdb9a77744.js" crossorigin="anonymous"></script>
+
+
+
+
+
+    <style>
+        .leaflet-container { height: 95%; }
+        .sidebar {margin-right: auto; margin-left: auto; margin-bottom: 100px; margin-top: 30px}
+        
+    </style>
+    <meta property="og:url"           content="http://192.168.1.186/#13/5.3967/-3.9634" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="{%static 'images/favicon.ico'%}" />
+
+  </head>
+  <body>
+    {% include 'base/nav.html' %}
+    {% leaflet_map "main" callback="window.simba" %}
+    <!-- optionally define the sidebar content via HTML markup -->
+    <div id="sidebar" class="leaflet-sidebar collapsed">
+
+        <!-- nav tabs -->
+        <div class="leaflet-sidebar-tabs">
+            <!-- top aligned tabs -->
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
+            </ul>
+
+            <!-- bottom aligned tabs -->
+            <ul role="tablist">
+          
+            </ul>
+        </div>
+  
+        <!-- panel content -->
+        <div class="leaflet-sidebar-content">
+            <div class="leaflet-sidebar-pane" id="home">
+                <h1 class="leaflet-sidebar-header">
+                    Menu
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+            
+                <div class="sidebar"><h4 id="dodo">Mes critères de recherche</h4></div>
+                <div class="sidebar"><label for="exampleDropdownFormEmail2" class="form-label">Types d'offres</label>
+                    <select id="filtre" class="form-select" aria-label="Default select example">
+                    <option value = "" selected>Aucun</option>
+                    <option value="A vendre">A vendre</option>
+                    <option value="A louer">A louer</option>
+                  </select></div>
+
+                    <div class="sidebar"><label for="exampleDropdownFormEmail2" class="form-label">Types de biens</label>
+                    <select id="filtre2" class="form-select" aria-label="Default select example">
+                    <option value = ""  selected>Aucun</option>
+                    <option value="Bureau">Bureau</option>
+                    <option value="Villa">Villa</option>
+                    <option value="Appartement">Appartement</option>
+                    <option value="Residence meublée">Residence meublée</option>
+                    <option value="Terrain">Terrain</option>
+                  </select></div>
+                    
+                    <div class="sidebar"><label for="exampleDropdownFormEmail2" class="form-label">Nombre de pieces</label>
+                    <select id="filtre5" class="form-select" aria-label="Default select example">
+                    <option value = ""  selected>Aucun</option>
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                    <option value=8>8</option>
+                    <option value=9>9</option>
+                    <option value=10>10</option>
+                    <option value=11>11</option>
+                    <option value=12>12</option>
+                    
+                    
+                  </select></div>
+
+                  
+
+                  <div  class="sidebar" style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
+                    <label for="exampleDropdownFormEmail2" class="form-label">Tarif</label>
+                    <input type="number" min='1' max='35675999' id="input-number-min">
+                    <input type="number" min='2' max='35676000' id="input-number-max">
+                    </div>
+                    <div id="slider"></div>
+                    <!--div  class="sidebar" style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
+                        <label for="exampleDropdownFormEmail2" class="form-label">Nombre de pièce</label>
+                        <input type="number" min='1' max='20' id="input-number-max2">
+                        </div>
+                    <div id="divtarif"></div-->
+                    
+                    <div class="sidebar"><label for="exampleDropdownFormEmail2" class="form-label">Commune</label>
+                    <select id="filtre3" class="form-select" aria-label="Default select example">
+                    <option value ="" selected>Aucun</option>
+                    <option value="Abobo">Abobo</option>
+                    <option value="Adjamé">Adjamé</option>
+                    <option value="Anyama">Anyama</option>
+                    <option value="Attecoubé">Attecoubé</option>
+                    <option value="Cocody">Cocody</option>
+                    <option value="Koumassi">Koumassi</option>
+                    <option value="Marcory">Marcory</option>
+                    <option value="Plateau">Plateau</option>
+                    <option value="Port-bouet">Port-bouet</option>
+                    <option value="Songon">Songon</option>
+                    <option value="Treichville">Treichville</option>
+                    <option value="Yopougon">Yopougon</option>
+                    
+                    
+                  </select></div>
+                  
+                  <div class="sidebar"><label for="exampleDropdownFormEmail2" class="form-label">Quartier</label>
+                    <select id="filtre4" class="form-select" aria-label="Default select example">
+                    <option value = "" selected>Aucun</option>
+                    <option value="Angré Extension">Angré Extension</option>
+                    <option value="Bessikoi - Djorogobité">Bessikoi - Djorogobité</option>
+                    <option value="Angré">Angré</option>
+                    <option value="8e Tranche">8e Tranche</option>
+                    <option value="Les Versants">Les Versants</option>
+                    <option value="7e Tranche">7e Tranche</option>
+                    <option value="Palmeraie">Palmeraie</option>
+                    <option value="9e Tranche">9e Tranche</option>
+                    <option value="Les Perles">Les Perles</option>
+                    <option value="Riviera 3">Riviera 3</option>
+                    <option value="Riviera 4">Riviera 4</option>
+                    <option value="Danga Nord">Danga Nord</option>
+                    <option value="Ambassade">Ambassade</option>
+                    <option value="Danga Sud">Danga Sud</option>
+                    <option value="Riviera Golf">Riviera Golf</option>
+                    
+                    
+                  </select></div>
+
+                          
+    
+               <ul>
+                </ul>
+
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="autopan">
+                <h1 class="leaflet-sidebar-header">
+                    Nouvelle onglet
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="messages">
+                <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+
+
+            
+        </div>
+    </div>
+    
+    
+    
+    <div id="fb-root"></div>
+
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+    <script type="text/javascript" >
+       function simba(map, options){
+
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        map.zoomControl.setPosition('bottomright');
+    // Assuming your map instance is in a variable called map
+    var hash = new L.Hash(map);
+
+       /* L.control.zoom({
+        position:'topright',
+        zoom: 1,
+	minZoom: 1,
+	maxZoom: 28,
+}).addTo(map);*/
+        //var BING_KEY = 'AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L';
+        var mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 28,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1
+	}).addTo(map);
+
+var options = {
+bingMapsKey: 'AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L',
+maxNativeZoom: 18,
+maxZoom: 28
+};
+//var BING_KEY = 'AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L';
+var bing = L.tileLayer.bing(options).addTo(map);
+    
+//var miniMap = new L.Control.MiniMap(mapbox).addTo(map);
+//geojson filter
+//var markers = L.markerClusterGroup();
+
+var data_quar;
+ var filterval5 = document.getElementById("filtre4").value;
+  var filterquar = function (feature) {
+if (feature.properties.nom == filterval5 ) return true;}
+function addLayerToMaap(){
+ //remove the layer from the map entirely
+ if (map.hasLayer(data_quar)){
+     data_quar.remove();
+ }
+       data_quar = new L.GeoJSON.AJAX("{% url 'data' %}",{
+        filter : filterquar,
+        
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng ,{
+                radius: 8.0,
+                fillColor: '#880000',
+                color: '#CCCCCC',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.5
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">' + (feature.properties.nom.toString()) + ' </th>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight:220, minWidth: 100});
+          //layer.bindTooltip( feature.properties.tarif.toString(),{permanent: true, direction: 'bottom' });
+          
+        }
+        }).addTo(map);
+}
+
+
+//ecouteur de commune
+ $("#filtre4").on('input', function(){
+ filterval5 = document.getElementById("filtre4").value;
+ console.log("the filter was changed to ", filterval5 ); 
+ //add the layer to the map again, now that we have changed the filter value. 
+ addLayerToMaap();
+ //map.flyTo(latlng);
+ });
+ //add the data la  yer and style based on attribute. 
+ addLayerToMaap();
+
+var data_geojson;
+var filterval = document.getElementById("filtre").value;
+var filterval2 = document.getElementById("filtre2").value;
+var filterval3 = document.getElementById("filtre3").value;
+var filterval6 = document.getElementById("filtre4").value;
+var filterval7 = document.getElementById("filtre5").value;
+
+var slidervar = document.getElementById('slider');
+
+noUiSlider.create(slidervar, {
+    start: [0, 1],
+    connect: true,
+    range: {
+        'min': 0,
+        'max': 1200000
+    }
+});
+
+document.getElementById('input-number-min').setAttribute("value", 1);
+document.getElementById('input-number-max').setAttribute("value", 35676000);
+
+var inputNumberMin = document.getElementById('input-number-min');
+var inputNumberMax = document.getElementById('input-number-max');
+inputNumberMin.addEventListener('change', function(){
+    slidervar.noUiSlider.set([this.value, null]);
+});
+inputNumberMax.addEventListener('change', function(){
+    slidervar.noUiSlider.set([null, this.value]);
+});
+
+slidervar.noUiSlider.on('update', function( values, handle ) {
+    //handle = 0 if min-slider is moved and handle = 1 if max slider is moved
+    if (handle==0){
+        document.getElementById('input-number-min').value = values[0];
+    } else {
+        document.getElementById('input-number-max').value =  values[1];
+
+    };
+
+    rangeMin = document.getElementById('input-number-min').value;
+rangeMax = document.getElementById('input-number-max').value;
+//////// zoom fonction //feature.properties.tarif <= rangeMax && feature.properties.tarif >= rangeMin
+//if (feature.properties.statut == filterval && feature.properties.types == filterval2 && feature.properties.piece == filterval7 && feature.properties.commune == filterval3 && feature.properties.quartier == filterval6 &&  feature.properties.tarif <= rangeMax && feature.properties.tarif >= rangeMin ) {return true};}
+var colorFilter = function (feature) {
+if (feature.properties.statut.includes(filterval) && feature.properties.types.includes(filterval2 ) && feature.properties.commune.includes(filterval3) && feature.properties.quartier.includes(filterval6)) {return true};
+}
+function addLayerToMap(){
+ //remove the layer from the map entirely
+ if (map.hasLayer(data_geojson)){
+     data_geojson.remove();
+ }
+  data_geojson = new L.GeoJSON.AJAX("http://192.168.1.185/filtergeom/",{
+        filter: colorFilter,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng,
+        {
+                radius: 8.0,
+                fillColor: '#e00',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.5
+            })},
+        onEachFeature : function(feature,layer){
+           //<img src="{% static 'images/logo.png' %}" style="width: 64px; height: 60px; padding: 5px">
+          //<img src ="{{offre.image}}">
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">' + (feature.properties.types.toString()) + ' :</th>\
+                        <td scope="row">' + (feature.properties.statut.toString()) + ', &nbsp;' + (feature.properties.tarif.toString()) + ' CFA,&nbsp;' + (feature.properties.piece.toString()) + ' pièces,&nbsp; ' + (feature.properties.commune.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Vue général </th>\
+                        <td><a href="'+(feature.properties.image.toString())+'"><img src ="'+(feature.properties.image.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Salon </th>\
+                        <td><a href="'+(feature.properties.image2.toString())+'"><img src ="'+(feature.properties.image2.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Vidéo</th>\
+                         <td colspan=2>\
+                        <video width="100%" height="auto" controls><source\
+                           src="'+ (feature.properties.video.toString()) + '"\
+                           type="video/mp4"></video>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Douche </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image3.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Document </th>\
+                        <td><div class="card"><div class="card-body"><embed src ="'+(feature.properties.document.toString())+'" width="200" height="150" type="application/pdf"></embed> </div></div></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Commentaire </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.commentaire.toString()) + ' </div></div> </td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fournisseur </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.agence.toString()) + ' </div></div> </td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Description </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.description.toString()) + ' </div></div> </td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Contact </th>\
+                        <td><div class="card"><div class="card-body"><a class="btn btn-default" href="tel:' + (feature.properties.contact.toString()) + '" aria-label="Settings"><i class="fa fa-phone" aria-hidden="true"></i><a href="mailto:' + (feature.properties.email.toString()) + '"><a class="btn btn-default" href="mailto:' + (feature.properties.email.toString()) + '" aria-label="Settings"><i class="fa fa-envelope" aria-hidden="true"></i></a>cell: ' + (feature.properties.contact.toString()) + '</div></div></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Partage </th>\
+                        <td><div class="card"><div class="card-body"><a class="btn btn-default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A//127.0.0.1%3A8000/%2316/5.3466/-3.9912" class="fb-xfbml-parse-ignore" aria-label="Settings"><i class="fa fa-facebook" aria-hidden="true" data-layout="button_count" data-size="small"></i></a><a class = "btn btn-defaut" href="https://twitter.com/intent/tweet?text=http%3A//127.0.0.1%3A8000/2/"><i class="fa-brands fa-twitter"></i></a><a class ="btn btn-default" href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//127.0.0.1%3A8000/%2314/5.3784/-3.9978&title=&summary=&source="><i class="fa-brands fa-linkedin-in"></i></a></div></div> </td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td><div class="card"><div class="card-body"><a href ="/pagedetail' + (feature.id.toString()) + '">Plus de details.</a> </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight:310, minWidth: 425});
+          layer.bindTooltip(feature.properties.tarif.toString(),{permanent: false, direction: 'bottom' });
+          //markers.addLayer(data_geojson);
+          
+        }
+        });
+  data_geojson.addTo(map);
+  data_geojson.on('data:loaded', function() { map.fitBounds(data_geojson.getBounds(),{padding: [200, 200]}); data_geojson.addTo(map); }.bind());
+    }
+    
+        //map.addLayer(markers);
+        
+//////////
+ $("#filtre").on('input', function(){
+ filterval = document.getElementById("filtre").value;
+ console.log("the filter was changed to ", filterval); 
+ //add the layer to the map again, now that we have changed the filter value. 
+ addLayerToMap();
+ //map.flyTo(latlng);
+ });
+ //add the data layer and style based on attribute. 
+ addLayerToMap();
+
+ //ecouteur types de bien
+ $("#filtre2").on('input', function(){
+ filterval2 = document.getElementById("filtre2").value;
+ console.log("the filter was changed to ", filterval2); 
+ //add the layer to the map again, now that we have changed the filter value. 
+ addLayerToMap();
+ });
+ //add the data layer and style based on attribute. 
+ addLayerToMap();
+//ecouteur de commune
+ $("#filtre3").on('input', function(){
+ filterval3 = document.getElementById("filtre3").value;
+ console.log("the filter was changed to ", filterval3); 
+ //add the layer to the map again, now that we have changed the filter value. 
+ addLayerToMap();
+ //map.flyTo(latlng);
+ });
+ //add the data layer and style based on attribute. 
+ addLayerToMap();
+ //ecouteur de quartier
+ $("#filtre4").on('input', function(){
+ filterval6 = document.getElementById("filtre4").value;
+ console.log("the filter was changed to ", filterval6); 
+ //add the layer to the map again, now that we have changed the filter value. 
+ addLayerToMap();
+ //map.flyTo(latlng);
+ });
+ //add the data layer and style based on attribute. 
+ addLayerToMap();
+
+ $("#filtre5").on('input', function(){
+ filterval7 = document.getElementById("filtre5").value;
+ console.log("the filter was changed to ", filterval7); 
+ //add the layer to the map again, now that we have changed the filter value. 
+ addLayerToMap();
+ //map.flyTo(latlng);
+ });
+ //add the data layer and style based on attribute. 
+ addLayerToMap();
+ });
+
+        
+
+        // afficher les communes
+ var data_comm;
+ var filterval4 = document.getElementById("filtre3").value;
+  var filtercomm = function (feature) {
+if (feature.properties.nom == filterval4 ) return true;}
+function addLayerToMa(){
+ //remove the layer from the map entirely
+ if (map.hasLayer(data_comm)){
+     data_comm.remove();
+ }
+       data_comm = new L.GeoJSON.AJAX("{% url 'commune' %}",{
+        filter : filtercomm,
+        
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng)},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">' + (feature.properties.nom.toString()) + ' </th>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight:220, minWidth: 100});
+          //layer.bindTooltip( feature.properties.tarif.toString(),{permanent: true, direction: 'bottom' });
+          
+        }
+        });
+}
+
+
+//ecouteur de commune
+ $("#filtre3").on('input', function(){
+ filterval4 = document.getElementById("filtre3").value;
+ console.log("the filter was changed to ", filterval4 ); 
+ //add the layer to the map again, now that we have changed the filter value. 
+ addLayerToMa();
+ //map.flyTo(latlng);
+ });
+ //add the data la  yer and style based on attribute. 
+ addLayerToMa();
+ 
+ //quartier
+ 
+ var data_quar;
+ var filterval5 = document.getElementById("filtre4").value;
+  var filterquar = function (feature) {
+if (feature.properties.nom == filterval5 ) return true;}
+function addLayerToMaap(){
+ //remove the layer from the map entirely
+ if (map.hasLayer(data_quar)){
+     data_quar.remove();
+ }
+       data_quar = new L.GeoJSON.AJAX("{% url 'data' %}",{
+        filter : filterquar,
+        
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng ,{
+                radius: 8.0,
+                fillColor: '#880000',
+                color: '#CCCCCC',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.5
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">' + (feature.properties.nom.toString()) + ' </th>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight:220, minWidth: 100});
+          //layer.bindTooltip( feature.properties.tarif.toString(),{permanent: true, direction: 'bottom' });
+          
+        }
+        }).addTo(map);
+}
+
+
+//ecouteur de commune
+ $("#filtre4").on('input', function(){
+ filterval5 = document.getElementById("filtre4").value;
+ console.log("the filter was changed to ", filterval5 ); 
+ //add the layer to the map again, now that we have changed the filter value. 
+ addLayerToMaap();
+ //map.flyTo(latlng);
+ });
+ //add the data la  yer and style based on attribute. 
+ addLayerToMaap();
+ 
+        // filtre statut louer
+        /*function filtrelouer (feature){
+        if(  feature.properties.statut == "A louer") return true;
+      }
+      var data_slider = new L.GeoJSON.AJAX("http://192.168.1.186/filtergeom/?format=json",{
+        /ilter : filtrelouer,
+        
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#ff0000',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){*/
+           //<img src="{% static 'images/logo.png' %}" style="width: 64px; height: 60px; padding: 5px">
+          //<img src ="{{offre.image}}">
+        
+          /*var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">' + (feature.properties.types.toString()) + ' :</th>\
+                        <td scope="row">' + (feature.properties.tarif.toString()) + ' cfa, &nbsp;' + (feature.properties.piece.toString()) + ' pièces,&nbsp;' + (feature.properties.statut.toString()) + ',&nbsp; ' + (feature.properties.commune.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Vue général :</th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image.toString())+'" width="150%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Salon :</th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image2.toString())+'" width="150%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Douche :</th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image3.toString())+'" width="150%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date de publication :</th>\
+                        <td>' + (feature.properties.date.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Agence :</th>\
+                        <td>' + (feature.properties.agence.toString()) + '</td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight:220, minWidth: 100});
+          layer.bindTooltip( feature.properties.tarif.toString(),{permanent: true, direction: 'bottom' });
+          
+        }
+        }).addTo(map);*/
+
+
+
+            // Use Leaflet API here
+         
+    //var data_bureau;
+     /*var data_zero;
+    
+            var filtrebureau = function  (feature){
+        if(  feature.properties.types == filt) return true;
+      }
+      function addLayerTo(){
+ //remove the layer from the map entirely
+ if (map.hasLayer(data_zero)){
+     data_zero.remove();
+ }
+       data_zero = new L.GeoJSON.AJAX("http://127.0.0.1:8000/filtergeom/?format=json",{
+        //filter : filtrebureau,
+        
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#e00',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+           //<img src="{% static 'images/logo.png' %}" style="width: 64px; height: 60px; padding: 5px">
+          //<img src ="{{offre.image}}">
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">ok :</th>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight:300, minWidth: 330});
+          layer.bindTooltip(feature.properties.tarif.toString(),{permanent: false, direction: 'bottom' });
+          //markers.addLayer(data_geojson);
+          
+        }
+        });
+    }*/
+        //ecouteur types de bien
+       
+ //slider
+ var cluster_tarif = new L.MarkerClusterGroup({showCoverageOnHover: false});
+ var data_mere1 = new L.GeoJSON.AJAX("http://127.0.0.1:8000/filtergeom/?format=json",{
+        //filter : filtertarif,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#e00',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">' + (feature.properties.types.toString()) + ' :</th>\
+                        <td scope="row">' + (feature.properties.statut.toString()) + ', &nbsp;' + (feature.properties.tarif.toString()) + ' CFA,&nbsp;' + (feature.properties.piece.toString()) + ' pièces,&nbsp; ' + (feature.properties.commune.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Vue général </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Salon </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image2.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Vidéo</th>\
+                         <td colspan=2>\
+                        <video width="100%" height="auto" controls><source\
+                           src="'+ (feature.properties['video'] !== null ? autolinker.link(feature.properties['video'].toLocaleString()) : '') + '"\
+                           type="video/mp4"></video>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Douche </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image3.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date de publication :</th>\
+                        <td>' + (feature.properties.date.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Agence :</th>\
+                        <td>' + (feature.properties.agence.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Contact :</th>\
+                        <td><a class="btn btn-default" href="tel:' + (feature.properties.contact.toString()) + '" aria-label="Settings"><i class="fa fa-phone" aria-hidden="true"></i></a><a class="btn btn-default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore" aria-label="Settings"><i class="fa fa-facebook" aria-hidden="true" data-href="http://192.168.1.186/#16/5.3958/-3.9422/" data-layout="button_count" data-size="small"></i></a><a href="mailto:' + (feature.properties.email.toString()) + '"><a class="btn btn-default" href="mailto:' + (feature.properties.email.toString()) + '" aria-label="Settings"><i class="fa fa-envelope" aria-hidden="true"></i></a></td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight:300, minWidth: 330});
+          layer.bindTooltip(feature.properties.tarif.toString(),{permanent: false, direction: 'bottom' });
+          //markers.addLayer(data_geojson);
+          
+          cluster_tarif.addLayer(data_mere1);
+        }
+        });
+    
+    cluster_tarif.addTo(map);
+
+ // <div id="slider"></div>
+
+//const $slider1[0] = $('#home');
+
+
+
+
+//xxxxxxxxxxxxxxxxxxxxxxxx
+
+//first let's clear the layer:
+//data_slider.clearLayers();
+
+         //filtre slider tarif && ||
+cluster_tarif.clearLayers();
+      data_mere1 = new L.GeoJSON.AJAX("http://127.0.0.1:8000/filtergeom/?format=json",{
+        filter:
+            function(feature, layer) {
+                // return (feature.properties.tarif <= rangeMax) && (feature.properties.tarif >= rangeMin);
+            },
+
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#e00',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">' + (feature.properties.types.toString()) + ' :</th>\
+                        <td scope="row">' + (feature.properties.statut.toString()) + ', &nbsp;' + (feature.properties.tarif.toString()) + ' CFA,&nbsp;' + (feature.properties.piece.toString()) + ' pièces,&nbsp; ' + (feature.properties.commune.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Vue général </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Salon </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image2.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Douche </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image3.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date de publication :</th>\
+                        <td>' + (feature.properties.date.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Agence :</th>\
+                        <td>' + (feature.properties.agence.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Contact :</th>\
+                        <td><a class="btn btn-default" href="tel:' + (feature.properties.contact.toString()) + '" aria-label="Settings"><i class="fa fa-phone" aria-hidden="true"></i></a><a class="btn btn-default" id="share1" href="https://web.facebook.com/?_rdc=1&_rdr" aria-label="Settings"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="mailto:' + (feature.properties.email.toString()) + '"><a class="btn btn-default" href="mailto:' + (feature.properties.email.toString()) + '" aria-label="Settings"><i class="fa fa-envelope" aria-hidden="true"></i></a></td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight:300, minWidth: 330});
+          layer.bindTooltip(feature.properties.tarif.toString(),{permanent: false, direction: 'bottom' });
+          //markers.addLayer(data_geojson);
+          cluster_tarif.addLayer(data_mere1);
+        }
+       
+        });
+//we will definitely do more here...wait
+
+         //filtre nombre de pièce && ||
+         var cluster_piece = new L.MarkerClusterGroup({showCoverageOnHover: false});
+ var data_piece = new L.GeoJSON.AJAX("http://127.0.0.1:8000/filtergeom/?format=json",{
+        //filter : filtertarif,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#e00',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">' + (feature.properties.types.toString()) + ' :</th>\
+                        <td scope="row">' + (feature.properties.statut.toString()) + ', &nbsp;' + (feature.properties.tarif.toString()) + ' CFA,&nbsp;' + (feature.properties.piece.toString()) + ' pièces,&nbsp; ' + (feature.properties.commune.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Vue général </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Salon </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image2.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Douche </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image3.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date de publication :</th>\
+                        <td>' + (feature.properties.date.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Agence :</th>\
+                        <td>' + (feature.properties.agence.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Contact :</th>\
+                        <td><a class="btn btn-default" href="tel:' + (feature.properties.contact.toString()) + '" aria-label="Settings"><i class="fa fa-phone" aria-hidden="true"></i></a><a class="btn btn-default" id="share1" href="https://web.facebook.com/?_rdc=1&_rdr" aria-label="Settings"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="mailto:' + (feature.properties.email.toString()) + '"><a class="btn btn-default" href="mailto:' + (feature.properties.email.toString()) + '" aria-label="Settings"><i class="fa fa-envelope" aria-hidden="true"></i></a></td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight:300, minWidth: 330});
+          layer.bindTooltip(feature.properties.tarif.toString(),{permanent: false, direction: 'bottom' });
+          //markers.addLayer(data_geojson);
+          
+          cluster_piece.addLayer(data_piece1);
+        }
+        });
+    
+    cluster_piece.addTo(map);
+         // slider
+         //var slidertype = document.getElementById('divtarif');
+//const $slider1[0] = $('#home');
+
+ /*noUiSlider.create(slidertype, {
+    start: 0,
+    connect: 'lower',
+    range: {
+        'min': 1,
+        'max': 20,
+    }
+});
+
+document.getElementById('input-number-max2').setAttribute("value", 20);
+
+var inputNumberMax = document.getElementById('input-number-max2');
+inputNumberMax.addEventListener('change', function(){
+    slidertype.noUiSlider.set([this.value, null]);
+});
+
+slidertype.noUiSlider.on('update', function( values, handle ) {
+    //handle = 0 if min-slider is moved and handle = 1 if max slider is moved
+    if (handle==0){
+        document.getElementById('input-number-max2').value = values[0];
+    }
+    // else {
+       // document.getElementById('input-number-max2').value =  values[1];
+
+    //}
+//we will definitely do more here...wait
+rangeMax2 = document.getElementById('input-number-max2').value;
+
+//first let's clear the layer:
+//data_tarif.clearLayers();
+
+         //filtre villa && ||
+      var filterpiece = function filtretarif (feature){
+        if(  feature.properties.piece == rangeMax2  )  return true;
+      }
+      cluster_piece.clearLayers();
+      data_piece = new L.GeoJSON.AJAX("http://127.0.0.1:8000/filtergeom/?format=json",{
+        filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#e00',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">' + (feature.properties.types.toString()) + ' :</th>\
+                        <td scope="row">' + (feature.properties.statut.toString()) + ', &nbsp;' + (feature.properties.tarif.toString()) + ' CFA,&nbsp;' + (feature.properties.piece.toString()) + ' pièces,&nbsp; ' + (feature.properties.commune.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Vue général </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Salon </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image2.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Douche </th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image3.toString())+'" width="100%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date de publication :</th>\
+                        <td>' + (feature.properties.date.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Agence :</th>\
+                        <td>' + (feature.properties.agence.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Contact :</th>\
+                        <td><a class="btn btn-default" href="tel:' + (feature.properties.contact.toString()) + '" aria-label="Settings"><i class="fa fa-phone" aria-hidden="true"></i></a><a class="btn btn-default" id="share1" href="https://web.facebook.com/?_rdc=1&_rdr" aria-label="Settings"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="mailto:' + (feature.properties.email.toString()) + '"><a class="btn btn-default" href="mailto:' + (feature.properties.email.toString()) + '" aria-label="Settings"><i class="fa fa-envelope" aria-hidden="true"></i></a></td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight:300, minWidth: 330});
+          layer.bindTooltip(feature.properties.tarif.toString(),{permanent: false, direction: 'bottom' });
+          //markers.addLayer(data_geojson);
+          cluster_piece.addLayer(data_piece);
+        }
+       
+        });
+});
+        //ecouteur nonbre de piece
+        $("#input-number-max2").on('input', function(){
+ filtertype = document.getElementById("input-number-max2").value;
+ console.log("the filter was changed to ", filtertype); 
+ //add the layer to the map again, now that we have changed the filter value. 
+ addLayerslidertarif();
+ });*/
+ //add the data layer and style based on attribute. 
+ //addLayerslidertarif();
+
+        /*var slider = document.getElementById("divtarif");
+
+        noUiSlider
+          .create(slider, {
+            start: [1, 20],
+            tooltips: true,
+            connect: true,
+            range: {
+              min: 1,
+              max: 20
+            }
+          })
+          .on("divtarif", function(e) {
+            console.log("e", e);
+            data_tarif.eachLayer(function(layer) {
+              console.log("layer", layer);
+              if (
+                parseFloat(layer.feature.properties.tarif) >=
+                  parseFloat(e[0]) &&
+                parseFloat(layer.feature.properties.tarif) <=
+                  parseFloat(e[1])
+              ) {
+                layer.addTo(map);
+              } else {
+                map.removeLayer(layer);
+              }
+            });
+          });*/
+        
+
+        //filtre residence && ||
+        /*var clusta = new L.MarkerClusterGroup({
+    showCoverageOnHover: false,
+    maxClusterRadius: 80
+});*/
+   
+var buffergroup = new L.MarkerClusterGroup()//.addTo(map);
+var buffered;
+var buffer_layer;
+
+      function filtreresidence (feature){
+        if(  feature.properties.types == "Residence meublée") return true;
+        else if(  feature.properties.statut == "A louer") return true;
+      }
+      var bufferData = new L.GeoJSON.AJAX("http://127.0.0.1:8000/filtergeom/?format=json",{
+
+        //filter : filtreresidence,
+    
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#e00',
+                color: '#000000',
+                weight: 1,
+                opacity: 0.0,
+                fillOpacity: 0.0
+            })},
+        
+        onEachFeature : function(feature,layer){
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">' + (feature.properties.types.toString()) + ' :</th>\
+                        <td scope="row">' + (feature.properties.tarif.toString()) + ' cfa, &nbsp;' + (feature.properties.piece.toString()) + ' pièces,&nbsp;' + (feature.properties.statut.toString()) + ',&nbsp; ' + (feature.properties.commune.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Vue général :</th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image.toString())+'" width="150%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Salon :</th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image2.toString())+'" width="150%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Douche :</th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image3.toString())+'" width="150%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date de publication :</th>\
+                        <td>' + (feature.properties.date.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Agence :</th>\
+                        <td>' + (feature.properties.agence.toString()) + '</td>\
+                    </tr>\
+                </table>';
+          //layer.bindPopup(popupContent, {maxHeight:220, minWidth: 100});
+          //layer.bindTooltip( feature.properties.tarif.toString(),{permanent: true, direction: 'bottom' });
+          buffered =  turf.buffer(feature, 100,{units: 'meters'});
+    L.geoJSON(buffered, {style:{color:'yellow', dashArray:'5,5',fillOpacity:0}})//.addTo(buffergroup);
+        },
+     
+        });
+       /* data_residence.on('data:loaded', function () {
+    clusta.addLayer(data_residence);
+    map.addLayer(clusta);
+});*/
+        /*var markers = L.markerClusterGroup();
+        markers.addLayer(data_residence);
+        map.addLayer(markers);*/
+        
+        
+
+    /*data_residence.on('data:loaded', function () {
+    markers.addLayer(data_residence);
+    map.addLayer(markers);
+});*/
+
+        /*var clusters = L.markerClusterGroup();
+        data_residence.on('data:loaded', function() 
+        {
+        clusters.addLayer(data_residence);
+        map.addLayer(clusters);
+        });*/
+//markercluster
+        /*var markers = L.markerClusterGroup();
+markers.addLayer(L.marker(getRandomLatLng(map)));
+map.addLayer(markers);*/
+/*var markers = L.markerClusterGroup();
+
+markers.addLayer(data_residence);
+
+map.addLayer(markers);
+map.fitBounds(markers.getBounds());*/
+        //cluster_residence.addTo(map);
+
+
+         //filtre terrain && ||
+      /*function filtreterrain (feature){
+        if(  feature.properties.types == "terrain") return true;
+        
+      }
+      var data_terrain = new L.GeoJSON.AJAX("http://192.168.1.186/filtergeom/?format=json",{
+
+        filter : filtreterrain,
+    
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng)},
+        onEachFeature : function(feature,layer){
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">' + (feature.properties.types.toString()) + ' :</th>\
+                        <td scope="row">' + (feature.properties.tarif.toString()) + ' cfa, &nbsp;' + (feature.properties.piece.toString()) + ' pièces,&nbsp;' + (feature.properties.statut.toString()) + ',&nbsp; ' + (feature.properties.commune.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Vue général :</th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image.toString())+'" width="150%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Salon :</th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image2.toString())+'" width="150%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Douche :</th>\
+                        <td><a href="'+(feature.properties.image3.toString())+'"><img src ="'+(feature.properties.image3.toString())+'" width="150%" height="auto%" title="Cliquez pour agrandir"></a></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date de publication :</th>\
+                        <td>' + (feature.properties.date.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Agence :</th>\
+                        <td>' + (feature.properties.agence.toString()) + '</td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight:220, minWidth: 300});
+          layer.bindTooltip( feature.properties.tarif.toString(),{permanent: true, direction: 'bottom' });
+          
+        }
+        });*/
+      
+      //point d'interet
+      //banque
+      
+      var banque = new L.GeoJSON.AJAX("{% url 'banque' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#222',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.nom.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+      
+      //boulangerie
+    var boulangerie = new L.GeoJSON.AJAX("{% url 'boulangerie' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#888',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.nom.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+     
+    var cafe = new L.GeoJSON.AJAX("{% url 'cafe' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#000',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.nom.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+     
+    var cinema = new L.GeoJSON.AJAX("{% url 'cinema' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#00f',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">' + (feature.properties.nom.toString()) + '</th>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+     
+    var commerce = new L.GeoJSON.AJAX("{% url 'commerce' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#fff',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.nom.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+     
+     
+     
+      
+        L.control.locate({locateOptions: {maxZoom: 28}, position: 'bottomright', strings: {
+        title: "Se localiser"}
+        }).addTo(map);
+        
+       var commissariat = new L.GeoJSON.AJAX("{% url 'commissariat' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#e00',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.nom.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+       
+       var culte= new L.GeoJSON.AJAX("{% url 'culte' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#cec',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.nom.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+       
+     var ecole = new L.GeoJSON.AJAX("{% url 'ecole' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#ce0',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.nom.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+     
+     var hopital = new L.GeoJSON.AJAX("{% url 'hopital' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#ccc',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.nom.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+     
+     var hotel = new L.GeoJSON.AJAX("{% url 'hotel' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#eee',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.nom.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+     
+     var fastfood = new L.GeoJSON.AJAX("{% url 'fastfood' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#0e0',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.nom.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+     
+     var pharmacie = new L.GeoJSON.AJAX("{% url 'pharmacie' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#e0e',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.nom.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+     
+     var station = new L.GeoJSON.AJAX("{% url 'station' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#ee0',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.nom.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+     
+     var fourni = new L.GeoJSON.AJAX("{% url 'fournimap' %}",{
+        //filter: filterpiece,
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+                radius: 8.0,
+                fillColor: '#ef0',
+                color: '#000000',
+                weight: 1,
+                opacity: 1.0,
+                fillOpacity: 0.8
+            })},
+        
+        
+        onEachFeature : function(feature,layer){
+        
+            var popupContent = '<table>\
+                     <tr>\
+                        <th scope="row">Fournisseur </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.organization.toString()) + ' </div></div> </td>\
+                    </tr>\
+                     <tr>\
+                        <th scope="row">Pays </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.country.toString()) + ' </div></div> </td>\
+                    </tr>\
+                     <tr>\
+                        <th scope="row">Ville</th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.city.toString()) + ' </div></div> </td>\
+                    </tr>\
+                     <tr>\
+                        <th scope="row">Phone</th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.phone.toString()) + ' </div></div> </td>\
+                    </tr>\
+                     <tr>\
+                        <th scope="row">Website </th>\
+                        <td><div class="card"><div class="card-body">' + (feature.properties.website.toString()) + ' </div></div> </td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent);
+          //markers.addLayer(data_geojson);
+        
+        }
+       
+        });
+        
+
+
+
+
+       
+        //data_offre.addTo(map);
+      //data_geojson.addTo(map)
+      /*data_vente.addTo(map);
+      data_louer.addTo(map);
+      data_bureau.addTo(map);
+      data_villa.addTo(map);
+      data_appart.addTo(map);
+      data_residence.addTo(map);
+      data_terrain.addTo(map);*/
+
+
+        //couche
+var baseLayers = {
+         "Bing":bing,
+          "Mapbox Streets": mapbox,
+          //"Open Street Map":osm,
+      }
+var groupedOverlays={
+"Point d'interet" : {
+'Pharmacie': pharmacie,
+'Hopital': hopital,
+'Hotel': hotel,
+'Boulangerie': boulangerie,
+'Ecole': ecole,
+"Station d'essence": station,
+'Commerce': commerce,
+'Lieu de culte': culte,
+'Commissariat': commissariat,
+'Banque': banque,
+'Cafe': cafe,
+'Cinema': cinema,
+//"A vendre":data_geojson,
+//"A louer":data_louer,
+//"cluster_tarif": cluster_tarif,
+
+},
+"Fournisseur" : {
+  'Founisseur': fourni
+},
+//"Type de bien" : {
+//"test" : bufferData,
+//"Villa":data_slider,
+//"Appartement":data_appart,
+//"Residence meublée":data_residence,
+//"Terrain":data_terrain,
+//}
+};
+var lc=L.control.groupedLayers(baseLayers, groupedOverlays, {autopan : true });
+lc.addTo(map);
+
+// recherche
+map.addControl(new L.Control.Search({
+            position:'topright',
+            layer: bufferData,
+            initial: false,
+            zoom: 16,
+            textErr: 'Aucun quartier trouvé',
+            marker: false,
+      
+            //textPlaceholder: 'Entrer le nom du quartier',
+            //collapsed: false,
+            //label: 'Rechercher par quartier',
+            //marker.animate: true,
+            //maxZoom:28,
+             //minZoom:26,
+            textPlaceholder: 'Rechercher par commune',
+            hideMarkerOnCollapse: false,
+            propertyName: 'commune'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-search fa-2x fa-fw';
+            //document.getElementsByClassName('search-button')[0].className +=' fa fa-search fa-2x fa-fw';
+
+//SIDEEBAR
+var sidebar = L.control.sidebar({
+    autopan: false,       // whether to maintain the centered map point when opening the sidebar
+    closeButton: true,    // whether t add a close button to the panes
+    container: 'sidebar', // the DOM container or #ID of a predefined sidebar container that should be used
+    position: 'left',     // left or right
+}).addTo(map);
+      
+//service itineraire
+var control = L.Routing.control({
+    language: 'fr',
+geocoder: L.Control.Geocoder.nominatim({ 
+    textPlaceholder: 'Rechercher par quartier',
+  }),
+	/*waypoints: [
+    L.latLng(5.300710, -4.005955),
+    L.latLng(5.391402080632778, -3.980738211625773)
+   ],*/
+   
+	routeWhileDragging: true,
+	reverseWaypoints: true,
+	showAlternatives: false,
+    collapsible: true,
+    fitSelectedRoutes: true,
+    show: false,
+    closeButton : true ,
+    addWaypoints: true,
+	altLineOptions: {
+		styles: [
+			{color: 'black', opacity: 0.15, weight: 9},
+			{color: 'white', opacity: 0.8, weight: 6},
+			{color: 'blue', opacity: 0.5, weight: 2}
+		]
+	},
+  //router: L.Routing.mapbox('pk.eyJ1Ijoic2Frby1kY2ciLCJhIjoiY2toNjM4eDN2MDUwazJ6bDJsNmp4c3pwciJ9.mh6fQCqdkp11tK2kGCe9YA'),
+  router: new L.Routing.osrmv1({language: 'fr'}),
+}).addTo(map);
+L.Routing.errorControl(control).addTo(map);
+//boutton
+function createButton(label, container) {
+    var btn = L.DomUtil.create('button', '', container);
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = label;
+    return btn;
+}
+
+/*control.on('click', function(e) {
+    var container = L.DomUtil.create('div'),
+        startBtn = createButton('Point de départ', container),
+        destBtn = createButton("Point d'arrivé", container);
+
+    L.popup()
+        .setContent(container)
+        .setLatLng(e.latlng)
+        .openOn(map);
+        
+        L.DomEvent.on(startBtn, 'click', function() {
+        control.spliceWaypoints(0, 1, e.latlng);
+        map1.closePopup();
+    });
+        
+        L.DomEvent.on(destBtn, 'click', function() {
+        control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
+        map1.closePopup();
+    });
+        
+        
+}); */
+
+
+//imprimante
+L.control.browserPrint({
+                printLayer: mapbox,
+                closePopupsOnPrint: false,
+				printModes: [
+					//L.control.browserPrint.mode.landscape("Tabloid VIEW", "Tabloid"),
+					//L.control.browserPrint.mode("Alert", "User specified print action", "A6", customActionToPrint, false),
+					L.control.browserPrint.mode.landscape("Paysage"),
+					"PORTrait",
+					//L.control.browserPrint.mode.auto("Auto", "B4"),
+					L.control.browserPrint.mode.custom("Séléctionnez la zone", "B5")
+				],
+        position: 'topright'
+
+            }).addTo(map);
+            L.Control.BrowserPrint.Utils.registerLayer(L.MarkerClusterGroup, 'L.MarkerClusterGroup', function (layer, utils) {
+				return layer;
+			});
+
+
+//buffer
+const drawnItems = new L.FeatureGroup();
+map.addLayer(drawnItems);
+
+const drawControl = new L.Control.Draw({
+    edit: {
+    buffer: true,
+    featureGroup: drawnItems,
+    remove: true,
+    
+  },
+  
+  position: 'topright',
+  draw: {
+    polyline: {
+      metric: true,
+    },
+    
+    polygon: false,
+    circle: {
+      shapeOptions: {
+        color: '#662d91',
+      },
+    },
+    circlemarker: false,
+    rectangle: false,
+    marker: false,
+   
+  },
+
+  
+  
+});
+L.drawLocal.edit.toolbar.buttons.buffer = "Dessiner une zone tampon au tour d'un axe routier.";
+L.drawLocal.edit.toolbar.buttons.bufferDisabled = "Dessiner une zone tampon à partir d'un axe routier.";
+L.drawLocal.edit.handlers.buffer = {
+  tooltip: {
+    text:  'Cliquer sur un axe routier et glisser pour déssiner une zone tampon.',
+  },
+};
+map.addControl(drawControl);
+
+map.on('draw:created', (e) => {
+  const { layerType, layer } = e;
+
+  if (layerType === 'marker') {
+    layer.bindPopup('A popup!');
+  }
+
+  drawnItems.addLayer(layer);
+});
+/*map.addControl(new mapboxgl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true
+}));*/
+
+//sidebar
+
+
+        }
+
+
+//
+
+    </script>
+     {% include 'base/footer.html' %}
+  </body>
+</html>

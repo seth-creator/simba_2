@@ -1,0 +1,180 @@
+﻿body {
+
+}
+
+
+#datePickerMainDiv {
+    width:235px;
+    height:190px;
+    margin:0px;
+    padding:0px;
+    background-image:url("datePickerCut/datePickerBodyImage.png");
+    background-size:235px 190px;
+    background-repeat:no-repeat;
+    display:none;
+}
+
+
+#topBorder {
+    width: 235px;
+    height: 10px;
+}
+
+.daysCell {
+    width: 29px;
+    height: 22px;
+    font-size: 11px;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+    background-color:white;
+    border:none;
+
+}
+
+
+.daysRow {
+    width: 204px;
+    height: 22px;
+}
+
+#daysHeaderRow {
+    width: 204px;
+    height: 22px;
+    background-color: #e1d9d9;
+    color: blue;
+}
+
+#tableDayPicker {
+    width: 204px;
+    height: 132px;
+    border-spacing: 0px;
+    text-align: center;
+    direction: rtl;
+    margin: 0px auto;
+    padding: 0px;
+}
+
+.dayA {
+    width: 15px;
+    height: 17px;
+    font-size: 13px;
+    text-decoration: none;
+    color: black;
+}
+
+.dayANoLink {
+    width: 15px;
+    height: 17px;
+    pointer-events: none;
+    cursor: default;
+    font-size: 13px;
+    text-decoration: none;
+    color: #e1d9d9;
+}
+
+
+#datePickerHeader {
+    width:235px;
+    height:20px;
+    background-image:url("datePickerCut/datePickerToolBarImage.png");
+    background-repeat:no-repeat;
+    background-size:235px 20px;
+}
+
+#calandarClose {
+    width:14px;
+    height:14px;
+    background-image:url("datePickerCut/datePickerCloseImage2.png");
+    background-repeat:no-repeat;
+    background-size:14px 14px;
+    position:relative;
+    left:18px;
+    top:3px;
+    cursor: pointer;
+    float:left;
+
+}
+
+#dpNext {
+    width:16px;
+    height:16px;
+    background-image:url("datePickerCut/datePickerNextImage3.png");
+    background-repeat:no-repeat;
+    background-size:15px 15px;
+    position:relative;
+    left:40px;
+    top:1px;
+    cursor: pointer;
+    float:left;
+
+
+}
+
+#dpPrev {
+    width:16px;
+    height:16px;
+    background-image:url("datePickerCut/datePickerPrevImage3.png");
+    background-repeat:no-repeat;
+    background-size:15px 15px;
+    position:relative;
+    left:50px;
+    top:1px;
+    cursor: pointer;
+    float:left;
+
+}
+
+#datePickerMonth {    
+    color:white;
+    font-weight:bold;
+    font-size:16px;
+    float:left;
+    width:60px;
+    position:relative;
+    left:45px;
+    text-align:center;
+    margin-right:0px;
+    top:-1PX;
+    letter-spacing:2px;
+}
+
+
+
+#datePickerYear {
+    color:white;
+    font-weight:bold;
+    font-size:12px;
+    float:left;
+    width:30px;
+    position:relative;
+    left:45px;
+    top:2px;
+    text-align:center;
+}
+
+
+#getDateVar { /* gets the date from the date box on the form and sets the picked date    display:none; */
+              display:none;
+}
+
+#pickedDateVar {
+    display:none;
+}
+
+.pickedCell {
+    width: 27px;
+    height: 20px;
+    font-size: 11px;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+    background-color:white;
+    border:1px solid red;
+}
+
+
+
+
+
+

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+  {% load leaflet_tags %}
+  {% load crispy_forms_tags %}
+  {% load bootstrap5 %}
+  {% load mapbox_location_field_tags %} 
+  <head>
+    
+  {% location_field_includes %}
+  
+  {% leaflet_js %}
+  {% leaflet_css %}
+  {% leaflet_js plugins="forms" %}
+  {% leaflet_css plugins="forms" %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  {% bootstrap_messages %}
+  <script type = "text/javascript" src="{% static 'js/jquery-3.1.0.js' %}"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0" nonce="tPOLq595"></script>
+  </head>
+  <body>
+    {% include 'base/nav.html' %}
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+  
+   <form>
+    {% csrf_token %}
+    {{pfilter.form}} 
+    
+  <button class="btn btn-outline-success" type="submit">Lancer</button>
+     
+  </form>
+  
+ <div class="container">    
+<ul class="list-group list-group-horizontal">
+{% for servi in pservices %}
+
+
+<!--div class="card" style="width:400px">
+  <div class="card-body">
+    <h4 class="card-title">{{servi.user}}</h4>
+    
+    <a href="/user{{ servi.id }}" class="btn btn-primary">voir profile</a> 
+  </div>
+</div-->
+
+<li>
+<div class="card" style="max-width: 540px;">
+  <img class="card-img-top" src="{{servi.photo.url}}" alt="Card image"  width = "400px"; height = "200px">
+  <div class="card-body">
+    <h4 class="card-title">{{servi.organization}}</h4>
+    <p class="card-text">{{servi.bio}}</p>
+    <a href="/user{{ servi.id }}" class="btn btn-primary">voir le profile</a>
+  </div>
+</div>
+</li>
+
+{% endfor %}
+</ul>
+ </div>
+ <p>{{ pservice.bio }}</p>
+ <p>{{ pservices.bio }}</p>
+{% include 'base/footer.html' %}
+  </body>
+</html>

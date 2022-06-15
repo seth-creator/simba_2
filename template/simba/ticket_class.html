@@ -1,0 +1,44 @@
+<div id="container"></div>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script>
+  Highcharts.chart('container', {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Tableau de bord simba'
+      },
+      xAxis: {
+          categories: [
+            {% for entry in dataset %}'{{ entry.types }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+          ]
+      },
+      series: [{
+          name: 'Villa',
+          data: [
+            {% for entry in dataset %}{{ entry.survived_count }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'green'
+      }, {
+          name: 'Appartement',
+          data: [
+            {% for entry in dataset %}{{ entry.not_survived_count }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'red'
+      },
+      {
+          name: 'Bureau',
+          data: [
+            {% for entry in dataset %}{{ entry.bureau_count }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'yellow'
+      },
+      {
+          name: 'Terrain',
+          data: [
+            {% for entry in dataset %}{{ entry.terrain_count }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'blue'
+      }]
+  });
+</script>

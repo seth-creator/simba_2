@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+  {% load leaflet_tags %}
+  {% load crispy_forms_tags %}
+  {% load bootstrap5 %}
+  {% load mapbox_location_field_tags %} 
+  <head>
+    
+  {% location_field_includes %}
+  
+  {% leaflet_js %}
+  {% leaflet_css %}
+  {% leaflet_js plugins="forms" %}
+  {% leaflet_css plugins="forms" %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  {% bootstrap_messages %}
+  <script type = "text/javascript" src="{% static 'js/jquery-3.1.0.js' %}"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0" nonce="tPOLq595"></script>
+  </head>
+  <body>
+    {% include 'base/nav.html' %}
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+  
+   <form>
+     {{myfilter.form}} 
+    
+  <button class="btn btn-outline-success" type="submit">Lancer</button>
+     
+  </form>
+  
+  
+  
+   {% for offre in offres %}
+   
+   <ul class="container-xs">
+
+
+
+<!--/div><div class="card" style="width: 18rem;">
+  <img src="{{offre.image.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{offre.types}}</h5>
+    <p class="card-text">{{offre.commentaire}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{offre.statut}}</li>
+    <li class="list-group-item">{{offre.tarif}}</li>
+    <li class="list-group-item">{{offre.commune}}</li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link">Plus de détails </a>
+    <a href="#" class="card-link">Contacte moi </a>
+    <div class="fb-share-button" 
+    data-href="http://192.168.1.186/produit/" 
+    data-layout="button_count"></div>
+    
+    
+  </div>
+</div-->
+
+
+<!--div class="card-group" style="width: 18rem;>
+  <div class="card">
+    <img src="{{offre.image.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{offre.types}}</h5>
+      <p class="card-text">{{offre.commentaire}}</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+  </div>
+</div-->
+<div class="container"> 
+<div class="row">
+    <div class="col">
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{offre.image.url}}" class="card-img" alt="..."  width="120%">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{offre.types}}</h5>
+        <p class="card-text">{{offre.commentaire}}.</p
+       
+        
+        
+        <p class="card-text"><small class="text-muted"><a href="/pagedetail{{ offre.id }}">Plus de details </a></small></p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+  </div>
+    
+  </div> 
+
+
+
+  </ul>
+{% endfor %}
+
+  
+{% include 'base/footer.html' %}
+  </body>
+</html>

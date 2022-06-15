@@ -1,0 +1,322 @@
+
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <div id="mapid" style="width: 100%; height: 400px;"></div>
+    <script>
+        var map = L.map('mapid').setView([ 5.334701336675025,-4.001587301587314], 13);
+
+       mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1
+	}).addTo(map);
+    L.marker([50.5, 30.5]).addTo(map);
+
+    //bing
+    var options = {
+  bingMapsKey: 'AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L',
+  maxNativeZoom: 18,
+  maxZoom: 28
+};
+        //var BING_KEY = 'AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L';
+      //var bingLayer = L.tileLayer.bing(options).addTo(map);
+
+   /* var data_immoo = new L.GeoJSON.AJAX("http://192.168.1.186/filtergeom/?format=json", {
+        onEachFeature : function(feature,layer){
+           //<img src="{% static 'images/logo.png' %}" style="width: 64px; height: 60px; padding: 5px">
+          //<img src ="{{offre.image}}">
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Offre :</th>\
+                        <td>' + (feature.properties.statut.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type de bien :</th>\
+                        <td>' + (feature.properties.types.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre de pièce :</th>\
+                        <td>' + (feature.properties.piece.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tarif :</th>\
+                        <td>' + (feature.properties.tarif.toString()) + '</td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight: 220});
+          
+        }});
+        data_immoo.addTo(mymap);*/
+
+         //filtre bureau && ||
+      function filtrebureau (feature){
+        if(  feature.properties.types == "Bureau") return true;
+      }
+      var data_bureau = new L.GeoJSON.AJAX("http://192.168.1.186/filtergeom/?format=json",{
+        filter : filtrebureau,
+        
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng)},
+        
+        
+        onEachFeature : function(feature,layer){
+           //<img src="{% static 'images/logo.png' %}" style="width: 64px; height: 60px; padding: 5px">
+          //<img src ="{{offre.image}}">
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Offre :</th>\
+                        <td>' + (feature.properties.statut.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type de bien :</th>\
+                        <td>' + (feature.properties.types.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre de pièce :</th>\
+                        <td>' + (feature.properties.piece.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tarif :</th>\
+                        <td>' + (feature.properties.tarif.toString()) + '</td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight: 220});
+          
+        }
+        });
+
+         //filtre villa && ||
+      function filtrevilla (feature){
+        if(  feature.properties.types == "Villa") return true;
+      }
+      var data_villa = new L.GeoJSON.AJAX("http://192.168.1.186/filtergeom/?format=json",{
+        filter : filtrevilla,
+
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng)},
+        
+        
+        onEachFeature : function(feature,layer){
+           //<img src="{% static 'images/logo.png' %}" style="width: 64px; height: 60px; padding: 5px">
+          //<img src ="{{offre.image}}">
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Offre :</th>\
+                        <td>' + (feature.properties.statut.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type de bien :</th>\
+                        <td>' + (feature.properties.types.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre de pièce :</th>\
+                        <td>' + (feature.properties.piece.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tarif :</th>\
+                        <td>' + (feature.properties.tarif.toString()) + '</td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight: 220});
+          
+        }
+        });
+
+         //filtre appartement && ||
+      function filtreappart (feature){
+        if(  feature.properties.types == "Appartement") return true;
+      }
+      var data_appart = new L.GeoJSON.AJAX("http://192.168.1.186/filtergeom/?format=json",{
+        filter : filtreappart,
+    
+    
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng)},
+        
+        onEachFeature : function(feature,layer){
+           //<img src="{% static 'images/logo.png' %}" style="width: 64px; height: 60px; padding: 5px">
+          //<img src ="{{offre.image}}">
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Offre :</th>\
+                        <td>' + (feature.properties.statut.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type de bien :</th>\
+                        <td>' + (feature.properties.types.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre de pièce :</th>\
+                        <td>' + (feature.properties.piece.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tarif :</th>\
+                        <td>' + (feature.properties.tarif.toString()) + '</td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight: 220});
+          
+          
+        }
+        });
+        
+
+        //filtre residence && ||
+        /*var markers = new L.MarkerClusterGroup({
+    showCoverageOnHover: false,
+    maxClusterRadius: 80
+});*/
+       
+      function filtreresidence (feature){
+        if(  feature.properties.types == "Residence meublée") return true;
+      }
+      var data_residence = new L.GeoJSON.AJAX("http://192.168.1.186/filtergeom/?format=json",{
+
+    
+
+        filter : filtreresidence,
+    
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng)},
+        
+        onEachFeature : function(feature,layer){
+           //<img src="{% static 'images/logo.png' %}" style="width: 64px; height: 60px; padding: 5px">
+          //<img src ="{{offre.image}}">
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Image :</th>\
+                        <td><img src="img/appart.jpg"/></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Offre :</th>\
+                        <td>' + (feature.properties.statut.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type de bien :</th>\
+                        <td>' + (feature.properties.types.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre de pièce :</th>\
+                        <td>' + (feature.properties.piece.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tarif :</th>\
+                        <td>' + (feature.properties.tarif.toString()) + '</td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight: 220});
+          
+        }
+        });
+        
+
+    /*data_residence.on('data:loaded', function () {
+    markers.addLayer(data_residence);
+    map.addLayer(markers);
+});*/
+
+        /*var clusters = L.markerClusterGroup();
+        data_residence.on('data:loaded', function() 
+        {
+        clusters.addLayer(data_residence);
+        map.addLayer(clusters);
+        });*/
+//markercluster
+        /*var markers = L.markerClusterGroup();
+markers.addLayer(L.marker(getRandomLatLng(map)));
+map.addLayer(markers);*/
+/*var markers = L.markerClusterGroup();
+
+markers.addLayer(data_residence);
+
+map.addLayer(markers);
+map.fitBounds(markers.getBounds());*/
+        //cluster_residence.addTo(map);
+
+
+         //filtre terrain && ||
+      function filtreterrain (feature){
+        if(  feature.properties.types == "terrain") return true;
+      }
+      var data_terrain = new L.GeoJSON.AJAX("http://192.168.1.186/filtergeom/?format=json",{
+
+        filter : filtreterrain,
+    
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng)},
+       
+        
+        
+        onEachFeature : function(feature,layer){
+           //<img src="{% static 'images/logo.png' %}" style="width: 64px; height: 60px; padding: 5px">
+          //<img src ="{{offre.image}}">
+        
+          var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Offre :</th>\
+                        <td>' + (feature.properties.statut.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type de bien :</th>\
+                        <td>' + (feature.properties.types.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre de pièce :</th>\
+                        <td>' + (feature.properties.piece.toString()) + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tarif :</th>\
+                        <td>' + (feature.properties.tarif.toString()) + '</td>\
+                    </tr>\
+                </table>';
+          layer.bindPopup(popupContent, {maxHeight: 220});
+          
+        }
+        });
+
+
+       
+        //data_offre.addTo(map);
+      //data_comm.addTo(map);
+      data_bureau.addTo(map);
+      data_villa.addTo(map);
+      data_appart.addTo(map);
+      data_residence.addTo(map);
+      data_terrain.addTo(map);
+
+
+        //couche
+var baseLayers = {
+         //"Bing":bingLayer,
+          "Mapbox Streets": mapbox,
+          //"Open Street Map":osm,
+      }
+var groupedOverlays={
+"Offre" : {
+
+//"A vendre":data_immo,
+//"A louer":data_offre,
+},
+"Type de bien" : {
+"Bureau":data_bureau,
+"Villa":data_villa,
+"Appartement":data_appart,
+"Residence meublée":data_residence,
+"Terrain":data_terrain,
+}
+};
+var lc=L.control.groupedLayers(baseLayers, groupedOverlays);
+lc.addTo(map);
+    
+    </script>
+
+ {% endblock %}

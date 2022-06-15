@@ -1,0 +1,342 @@
+<html>
+{% load static %}
+{% load bootstrap5 %}
+ {% bootstrap_css %}
+<head>
+<meta charset="UTF-8">
+<title>Page produit</title>
+<script type = "text/javascript" src="{% static 'js/jquery-3.1.0.js' %}"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0" nonce="tPOLq595"></script>
+
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100px; /* Full width */
+  height: 700px; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 700px;
+  max-width: 900px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+</style>
+
+</head>
+<body>
+ <!--img id="myImg" src="img_snow.jpg" alt="Snow" style="width:100%;max-width:300px"-->
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+    
+    {% include 'base/nav.html' %}
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+    
+    
+    <div class="container-sm">
+    <table class="table table-bordered">
+  <thead class="table-light">
+   <tr>
+      <th scope="col">Statut</th>
+      <th scope="col">{{ product.statut }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <th scope="col">Type</th>
+      <th scope="col">{{ product.types }}</th>
+  </tbody>
+  <tbody>
+    <th scope="col">Tarif</th>
+      <th scope="col">{{ product.tarif }}</th>
+  </tbody>
+  <tbody>
+    <th scope="col">Piece</th>
+      <th scope="col">{{ product.piece }}</th>
+  </tbody>
+  <tbody>
+    <th scope="col">Vue d'exterieur</th>
+      <th scope="col"><img id ="myImg" src = "{{product.image.url}}" width="700px" height="300px"></th>
+  </tbody>
+  <th scope="col">Salon</th>
+      <th scope="col"><img id ="myImg2"  src = "{{product.image2.url}}" width="700px" height="300px"></th>
+  </tbody>
+<tbody>
+  <th scope="col">Salle d'eau</th>
+      <th scope="col"><img id ="myImg3"  src = "{{product.image3.url}}" width="700px" height="300px" ></th>
+  </tbody>
+  <tbody>
+  <th scope="col">Vidéo</th>
+      <th scope="col"><video width="700px" height="300px" controls src = "{{product.video.url}}" type="video/mp4"></video></th>
+  </tbody>
+  <tbody>
+  <th scope="col">Document </th>
+      <td ><embed src="{{product.document}}" width= "800px" height="500px" type='application/pdf'/></td>
+  </tbody>
+  <tbody>
+  <th scope="col">Commentaire</th>
+      <td ><p class="text-break">{{product.commentaire}}</p></td>
+  </tbody>
+  <tbody>
+  <th scope="col">Quartier</th>
+      <th scope="col">{{product.quartier}}</th>
+  </tbody>
+  <tbody>
+  <th scope="col">Commune</th>
+      <th scope="col">{{product.commune}}</th>
+  </tbody>
+  <tbody>
+  <th scope="col">Agence</th>
+      <th scope="col">{{product.fournisseur}}</th>
+  </tbody>
+  <tbody>
+  <th scope="col">Note</th>
+      <th scope="col">{{Noty}}</th>
+      <th scope="col">{{Noty.Note}}</th>
+      <th scope="col">{{Noty.values.Note}}</th>
+  </tbody>
+  
+</table>
+</div>
+    
+
+    
+    <!-- related objet -->
+ <div class="container-sm">
+ <div class="card text-center">
+  <div class="card-header">
+    Produit similaire
+  </div>
+  {% for related in relatedvalue %}
+  <div class="card-body">
+    <h5 class="card-title">{{related.types}}</h5>
+    <p class="card-text">{{related.commentaire}}.</p>
+    <div >           
+  <a href = "/pagedetail{{related.id}}"><img src="{{related.image.url}}" class="img-thumbnail" title ="{{related.types}}" width="304" height="236"> </a>
+</div>
+    <a href = "/pagedetail{{related.id}}" class="btn btn-primary">Plus de détails</a>
+  </div>
+   {% endfor %}
+  <div class="card-footer text-muted">
+  </div>
+</div>
+ </div>
+ 
+
+    
+ 
+ 
+    
+    
+    
+    
+  <div class="container-sm">
+ <div class="card text-left">
+ <div class="card text-center"><div class="card-header">
+    Commentaire
+ </div></div>
+  
+  
+   {% for note in Notes %}
+    <ul>
+<div class="card w-75">
+  <div class ="container"><div class="card-body">
+    <h5 class="card-title">{{note.user}}</h5>
+    <p class="card-text">{{note.text}}</p>
+  </div></div>
+</div>
+
+
+</ul>
+  {%endfor%}
+  <div class="card-footer text-muted">
+  </div>
+  </div>
+   </div>
+
+  
+  
+<div class ="container">
+   <form  method="post">
+    {% csrf_token %}
+    <textarea class="form-control" id="commento" name = "commento" rows="3"></textarea>
+    <input type="submit" value="Publier">
+  </form>
+</div>
+
+
+<div class ="container">
+ <form method="post">
+  {% csrf_token %}
+    <label for="id_note_note">note: </label>
+    <input id="id_note_note" type="text" name="note_note" value="">
+    <!--label for="id_note_note" name ="note_note" class="form-label">Example range</label>
+<input type="range" class="form-range" id="id_note_note"-->
+    <input type="submit" value="OK">
+</form>
+</div>
+   
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+<div class="container">
+  <div class="row row-cols-3">
+    <div class="col">
+      <a href="/user{{product.fournisseur.id}}" class="btn btn-link"><button type="button" class="btn btn-secondary btn-sm">Voir le profil du fournisseur</button</a>
+    </div>
+    <div class="col">
+       <button type="button" class="btn btn-secondary btn-sm"><a href = "{% url 'contact' %}">Envoyer un mail</a></button>
+    </div>
+    <!--div class="col">
+     <a href="{% url 'notes' %}" class="btn btn-link"><button type="button" class="btn btn-secondary btn-sm">Voir ou faire un commentaire</button></a>
+    </div-->
+  </div>
+</div>
+
+<div class="container">
+  <div class="row row-cols-3">
+    
+    <div class="col"><span  class="fb-share-button" 
+data-href="" 
+data-layout="button_count">
+</span></div>
+    <div class="col"><span  class="container"><a href="https://twitter.com/intent/tweet?text=http%3A//127.0.0.1%3A8000/2/">Partager sur Twitter</a></span></div>
+    <div class="col"><span class="container"><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//127.0.0.1%3A8000/%2314/5.3784/-3.9978&title=&summary=&source=">Partager sur LinkedIn</a></span></div>
+  </div>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var img2 = document.getElementById("myImg2");
+var img3 = document.getElementById("myImg3");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+img2.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+img3.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+</script>
+
+{% include 'base/footer.html' %}
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpbh-mt'},{'server':'p3plmcpnl487010'},{'id':'8437534'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script>
+</html>

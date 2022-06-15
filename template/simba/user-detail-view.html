@@ -1,0 +1,53 @@
+<html>
+{% load static %}
+{% load bootstrap5 %}
+ {% bootstrap_css %}
+<head>
+<meta charset="UTF-8">
+<title>Page produit</title>
+<script type = "text/javascript" src="{% static 'js/jquery-3.1.0.js' %}"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0" nonce="tPOLq595"></script>
+</head>
+<body>
+    
+    {% include 'base/nav.html' %}
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+    
+    
+    
+
+
+
+
+<p>Fournisseur : {{ userdt.organization }}<p>
+
+
+<p> Ville: {{ userdt.city }}</p>
+
+<p> Pays: {{ userdt.country }}</p>
+<p>Site internet: {{ userdt.website }}</p>
+
+
+ <button type="button" class="btn btn-link"><a href = "/produit/?fournisseur={{userdt.id}}">Voir ses biens</a></button>
+<p><button type="button" class="btn btn-link"><a href = "{% url 'contact' %}">Envoyer un mail</a></button></p>
+<p><button type="button" class="btn btn-link"><a href="/fournisseur/">Liste fournisseur</a></button></p>
+
+
+
+<span class="fb-share-button" 
+data-href="" 
+data-layout="button_count">
+</span>
+
+{% include 'base/footer.html' %}
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpbh-mt'},{'server':'p3plmcpnl487010'},{'id':'8437534'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script>
+</html>
