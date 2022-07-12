@@ -63,14 +63,25 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/fdb9a77744.js" crossorigin="anonymous"></script>
+    
+    <!-- reference your installed Font Awesome Free package's files here -->
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <!-- reference your installed Font Awesome Free package's files here -->
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    
+    <!-- Our project just needs Font Awesome Free's Solid + Brand files -->
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/regular.css' %}" rel="stylesheet" type="text/css">
 
 
 
 
 
     <style>
-        .leaflet-container { height: 95%; }
-        .sidebar {margin-right: auto; margin-left: auto; margin-bottom: 100px; margin-top: 30px}
+        .leaflet-container { height: 80%; }
+        .sideba {margin-right: auto; margin-left: auto; margin-bottom: 0px; margin-top: 20px}
         
     </style>
     <meta property="og:url"           content="http://192.168.1.186/#13/5.3967/-3.9634" />
@@ -106,16 +117,16 @@
                     Menu
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-            
-                <div class="sidebar"><h4 id="dodo">Mes critères de recherche</h4></div>
-                <div class="sidebar"><label for="exampleDropdownFormEmail2" class="form-label">Types d'offres</label>
+                <div class = "container" > 
+                <div class="form-group sideba card-title" ><h5 id="dodo">Mes critères de recherche</h5></div>
+                <div ><label for="exampleDropdownFormEmail2" class="form-label">Types d'offres</label>
                     <select id="filtre" class="form-select" aria-label="Default select example">
                     <option value = "" selected>Aucun</option>
                     <option value="A vendre">A vendre</option>
                     <option value="A louer">A louer</option>
                   </select></div>
 
-                    <div class="sidebar"><label for="exampleDropdownFormEmail2" class="form-label">Types de biens</label>
+                    <div class="form-group sideba" ><label for="exampleDropdownFormEmail2" class="form-label">Types de biens</label>
                     <select id="filtre2" class="form-select" aria-label="Default select example">
                     <option value = ""  selected>Aucun</option>
                     <option value="Bureau">Bureau</option>
@@ -125,28 +136,28 @@
                     <option value="Terrain">Terrain</option>
                   </select></div>
                     
-                    <div class="sidebar"><label for="exampleDropdownFormEmail2" class="form-label">Nombre de pieces</label>
+                    <div class="form-group sideba"><label for="exampleDropdownFormEmail2" class="form-label">Nombre de pieces</label>
                     <select id="filtre5" class="form-select" aria-label="Default select example">
-                    <option value = ""  selected>Aucun</option>
-                    <option value=1>1</option>
-                    <option value=2>2</option>
-                    <option value=3>3</option>
-                    <option value=4>4</option>
-                    <option value=5>5</option>
-                    <option value=6>6</option>
-                    <option value=7>7</option>
-                    <option value=8>8</option>
-                    <option value=9>9</option>
-                    <option value=10>10</option>
-                    <option value=11>11</option>
-                    <option value=12>12</option>
+                    <option value = "" selected>Aucun</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
                     
                     
                   </select></div>
 
                   
 
-                  <div  class="sidebar" style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
+                  <div  class="sideba" style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
                     <label for="exampleDropdownFormEmail2" class="form-label">Tarif</label>
                     <input type="number" min='1' max='35675999' id="input-number-min">
                     <input type="number" min='2' max='35676000' id="input-number-max">
@@ -158,7 +169,7 @@
                         </div>
                     <div id="divtarif"></div-->
                     
-                    <div class="sidebar"><label for="exampleDropdownFormEmail2" class="form-label">Commune</label>
+                    <div class="form-group sideba"><label for="exampleDropdownFormEmail2" class="form-label">Commune</label>
                     <select id="filtre3" class="form-select" aria-label="Default select example">
                     <option value ="" selected>Aucun</option>
                     <option value="Abobo">Abobo</option>
@@ -177,7 +188,7 @@
                     
                   </select></div>
                   
-                  <div class="sidebar"><label for="exampleDropdownFormEmail2" class="form-label">Quartier</label>
+                  <div class="form-group sideba"><label for="exampleDropdownFormEmail2" class="form-label">Quartier</label>
                     <select id="filtre4" class="form-select" aria-label="Default select example">
                     <option value = "" selected>Aucun</option>
                     <option value="Angré Extension">Angré Extension</option>
@@ -198,8 +209,9 @@
                     
                     
                   </select></div>
+                  <p id ="para"></p>
 
-                          
+                 </div>         
     
                <ul>
                 </ul>
@@ -334,7 +346,7 @@ noUiSlider.create(slidervar, {
     connect: true,
     range: {
         'min': 0,
-        'max': 1200000
+        'max': 12000000
     }
 });
 
@@ -361,28 +373,42 @@ slidervar.noUiSlider.on('update', function( values, handle ) {
 
     rangeMin = document.getElementById('input-number-min').value;
 rangeMax = document.getElementById('input-number-max').value;
+
+const myIcon = L.divIcon({
+  html: '<div><i class="fa-solid fa-location-dot fa-2xl" style ="color : tomato; width:20px "></i></div>',
+  className: '',
+  //<i class="fa-solid fa-location-dot"></i>
+  //<i class="fa-regular fa-location-dot"></i>
+  iconSize: [20, 20],
+ // className: 'fa-solid'
+});
+var dato =[{name: 15,prenom:5}];
+//var myIcon = L.divIcon({className: 'fa-solid fa-location-dot'});
+const data = dato.filter(function (filto){return filto.name >10;});
+var doc = document.getElementById('para');
+doc.innerHTML = colorFilter ;
+//var monicon = L.divIcon({className: 'fa-duotone fa-location-dot'});
 //////// zoom fonction //feature.properties.tarif <= rangeMax && feature.properties.tarif >= rangeMin
 //if (feature.properties.statut == filterval && feature.properties.types == filterval2 && feature.properties.piece == filterval7 && feature.properties.commune == filterval3 && feature.properties.quartier == filterval6 &&  feature.properties.tarif <= rangeMax && feature.properties.tarif >= rangeMin ) {return true};}
+//if (feature.properties.statut.includes(filterval) && feature.properties.types.includes(filterval2 ) && feature.properties.commune.includes(filterval3) && feature.properties.quartier.includes(filterval6)) {return true};
 var colorFilter = function (feature) {
-if (feature.properties.statut.includes(filterval) && feature.properties.types.includes(filterval2 ) && feature.properties.commune.includes(filterval3) && feature.properties.quartier.includes(filterval6)) {return true};
+  //if (feature.properties.tarif.toString().includes('900000')) return true;
+if (feature.properties.statut.includes(filterval) && feature.properties.types.includes(filterval2 ) && feature.properties.commune.includes(filterval3) && feature.properties.quartier.includes(filterval6) && feature.properties.piece.includes(filterval7)) return true;
+//if  (feature.properties.tarif <= rangeMax && feature.properties.tarif >= rangeMin) {return true;}
+//function filta (filto){return filto> 10000;}
 }
 function addLayerToMap(){
  //remove the layer from the map entirely
  if (map.hasLayer(data_geojson)){
      data_geojson.remove();
  }
-  data_geojson = new L.GeoJSON.AJAX("http://192.168.1.185/filtergeom/",{
+  data_geojson = new L.GeoJSON.AJAX("http://192.168.1.185/filtergeom/?format=json",{
         filter: colorFilter,
         pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng,
+        return L.marker(latlng,
         {
-                radius: 8.0,
-                fillColor: '#e00',
-                color: '#000000',
-                weight: 1,
-                opacity: 1.0,
-                fillOpacity: 0.5
-            })},
+                icon : myIcon
+        });},
         onEachFeature : function(feature,layer){
            //<img src="{% static 'images/logo.png' %}" style="width: 64px; height: 60px; padding: 5px">
           //<img src ="{{offre.image}}">
@@ -447,7 +473,7 @@ function addLayerToMap(){
         }
         });
   data_geojson.addTo(map);
-  data_geojson.on('data:loaded', function() { map.fitBounds(data_geojson.getBounds(),{padding: [200, 200]}); data_geojson.addTo(map); }.bind());
+  data_geojson.on('data:loaded', function() { map.fitBounds(data_geojson.getBounds(),{maxZoom: 17}); data_geojson.addTo(map); }.bind()); //maxZoom: 28,
     }
     
         //map.addLayer(markers);

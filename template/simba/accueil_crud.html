@@ -1,0 +1,57 @@
+
+{% include 'base/crud_nav.html' %}
+{% block title %}
+Gestion des données
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+<div class="m-md-4 col-md-8"><a href="{% url 'add' %}" class="btn btn-primary btn-sm">Publier un bien</a></div>
+<div class="m-md-4 col-md-2"><a href="{% url 'country_export' %}" class="btn btn-primary btn-sm">Exporter les données</a></div>
+</div>
+</div>
+<div class="container"><table class="table table-striped table-bordered ">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Statut</th>
+            <th>Types</th>
+            <th>Tarif</th>
+            <th>opération</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in members %}
+        <tr>
+            <td>{{ member.id }}</td>
+            <td><a href="{% url 'detail' id=member.id %}">{{ member.statut }}</a></td>
+            <td>{{ member.types }}</td>
+            <td>{{ member.tarif }}</td>
+            <td>
+                <a href="{% url 'edit' id=member.id %}" class="btn btn-primary btn-sm">Éditer</a>
+                <a href="{% url 'delete' id=member.id %}" class="btn btn-primary btn-sm" id="btn_del">Effacer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+<!--Mettez la page ici-->
+
+{% endblock content %}
+
+{% block script %}
+<script>
+    $(function(){
+        $("#btn_del").click(function(){
+            if(confirm("Voulez-vous le supprimer?")){
+                //Traitement oui (continuez sans rien faire)
+            }else{
+                //Annuler le traitement
+                return false;
+            }
+        });
+    });
+</script>
+{% endblock %}

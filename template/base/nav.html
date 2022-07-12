@@ -9,7 +9,7 @@
     </a>
 
   </div>
-  <span class="navbar-brand"><a  class="navbar-brand"  href = "{% url 'acces2' %}">Espace fournisseur</a></span>
+  <span class="navbar-brand"><a  class="navbar-brand"  href = "">Espace fournisseur</a></span>
   <span class="navbar-brand"><a  class="navbar-brand"  href = "{% url 'produit' %}">Page produit</a></span>
   <span class="navbar-brand"><a  class="navbar-brand"  href = "{% url 'service' %}">page service</a></span>
   <span class="navbar-brand"><a  class="navbar-brand"  href = "{% url 'fournisseur' %}">Page fournisseur</a></span>
@@ -31,9 +31,6 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <!--a class="nav-link" href="{% url 'acces2' %}">Espace fournisseur</a-->
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="{% url 'produit' %}">Page produit</a>
         </li>
         <li class="nav-item">
@@ -43,6 +40,10 @@
           <a class="nav-link" href="{% url 'service' %}">Page service</a>
         </li>
       </ul>
+      
+    </div>
+    <div class="row navbar-nav">
+      <div class="col-md-3 col-md-offset-8 nav-item"><a class="nav-link"  href = "{% url 'tableau' %}">Espace Fournisseur</a></div>
     </div>
   </div>
 </nav> 

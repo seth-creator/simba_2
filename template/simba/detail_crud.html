@@ -1,0 +1,18 @@
+{% include 'base/nav_crud.html' %}
+{% load static %}
+{% load bootstrap5 %}
+
+{% block title %}Détails du membre{% endblock title %}
+
+{% block content %}
+    <h3>Informations détaillées des membres</h3>
+    <h5>Statut</h5>
+    {{ member.statut }}
+    <h5>Type de bien</h5>
+    {{ member.types }}
+    <h5>Tarif</h5>
+    {{ member.tarif }}
+    <br>
+    <br>
+    <a href="{% url 'index' %}" class="btn btn-default btn-sm">Revenir</a>
+{% endblock content %}

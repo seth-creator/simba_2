@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SESSION_COOKIE_AGE = 5 * 60 #
+#SESSION_COOKIE_AGE = 15 * 60 #
 #AUTH_USER_MODEL = 'app_simba.UseProfile'
 AUTH_PROFILE_MODULE = "UseProfile"
 from pathlib import Path
@@ -42,7 +42,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-s0*(j%us(xdixzmxb4@dq=f8f62)xafpy1%-zi_7+v(^!qe#am'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '192.168.1.185', '127.0.0.1']
 
@@ -71,6 +71,8 @@ INSTALLED_APPS = [
     'user_visit',
     #'material',
     'import_export',
+    'fontawesomefree',
+    'simba_crud'
 ]
 
 MIDDLEWARE = [
@@ -226,3 +228,4 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD =''
 EMAIL_PORT = 25
 EMAIL_USE_TLS = False
+LANGUAGE_CODE = 'fr-fr'

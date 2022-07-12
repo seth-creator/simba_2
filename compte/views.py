@@ -28,7 +28,7 @@ def accespage(request) :
         user = authenticate(request,username = username, password = password)
         if user is not None :
             login(request, user)
-            return redirect('filter')
+            return redirect('tableau')
         else :
             messages.info(request, "il ya une erreur sur le mot de passe ou nom d'utilisateur")
         

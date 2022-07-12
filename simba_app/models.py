@@ -29,7 +29,7 @@ class MonOffre(models.Model):
     types = models.CharField('Type de bien', max_length = 200, null = True, choices = TYPE )
     def __str__(self) :
         return self.types
-    piece = models.IntegerField('Nombre de pièce', null=True)
+    piece = models.CharField('Nombre de pièce', max_length = 10, null=True)
     superficie = models.FloatField(null=True)
     tarif = models.IntegerField('Mon tarif',null = True)
     image = models.ImageField('Vue générale',null = True, blank = True, upload_to ='uploads/')
@@ -82,6 +82,7 @@ class MonOffre(models.Model):
     #notes = models.ForeignKey('Notation', on_delete = models.CASCADE, null = True)
     #lon = models.FloatField()
     #lat = models.FloatField()
+    users = models.CharField(max_length = 200, null = True)
     geom = SpatialLocationField('Localiser votre bien',blank = False, null = True)
 
     #objects = models.GeoManager()
@@ -304,7 +305,8 @@ class Passenger(models.Model):
     
 class Commentaires(models.Model) :
     text = models.TextField('',max_length = 200)
-    user = models.ForeignKey(User, null = True,on_delete = models.CASCADE)
+    nom = models.CharField('',max_length = 200, blank = True)
+    #user = models.ForeignKey(User, null = True,on_delete = models.CASCADE)
     offre = models.ForeignKey(MonOffre,null = True, on_delete = models.CASCADE, blank = True)
     
     
@@ -313,5 +315,10 @@ class Notation(models.Model):
     monoffre = models.ForeignKey('MonOffre', null = True, on_delete = models.CASCADE)
     #def __str__(self):
         #return self
+class Crud (models.Model):
+    nom = models.CharField(max_length=200)
+    prenom = models.CharField(max_length=200)
+    age = models.IntegerField()
+    pays = models.CharField(max_length = 200)
     
     

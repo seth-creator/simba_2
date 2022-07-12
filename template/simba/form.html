@@ -32,33 +32,31 @@
    </style>
   </head>
   <body>
-    {% include 'base/nav.html' %}
-    <h4>Publier une offre</h4>
-    <div id="form" ><form method="post" enctype="multipart/form-data" class="row mb-3">
-        {% csrf_token %}
-        
-        {{form.statut|as_crispy_field}}
-        {{form.types|as_crispy_field}} 
-        {{form.piece|as_crispy_field}} 
-        {{form.superficie|as_crispy_field}} 
-        {{form.tarif|as_crispy_field}} 
-        {{form.commune|as_crispy_field}} 
-        {{form.image|as_crispy_field}} 
-        {{form.image2|as_crispy_field}} 
-        {{form.image3|as_crispy_field}} 
-        {{form.video|as_crispy_field}} 
-        {{form.PDF|as_crispy_field}} 
-        {{form.commentaire|as_crispy_field}} 
-        {{form.agence|as_crispy_field}} 
-        {{form.contact|as_crispy_field}}
-        {{form.email|as_crispy_field}}
-        {{form.date|as_crispy_field}}
-        <div id="">{{form.geom|as_crispy_field}}</div>
+   {% include 'base/nav_crud.html' %}
+   
 
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary">Publier</button>
+
+{% block title %}Modification {% endblock title %}
+
+{% block content %}
+    {% if id %}
+    <h3 class="page-header">Modification des données</h3>
+    <form action="{% url 'edit' id=id %}" method="post" class="form-horizontal" role="form">
+    {% else %}
+    <h3 class="page-header">publication de bien</h3>
+    <form action="{% url 'add' %}" method="post" class="form-horizontal" role="form">
+    {% endif %}
+      {% csrf_token %}
+      {{form}}
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">Envoyer</button>
         </div>
-    </form>{{ form.media }}</div>
+      </div>
+    </form>
+    <a href="{% url 'index' %}" class="btn btn-default btn-sm">Revenir</a>
+{% endblock content %}
+    <div class="container">{{form.media}}</div>
     {% include 'base/footer.html' %}
   </body>
 </html>

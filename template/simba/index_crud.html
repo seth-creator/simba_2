@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap5 %}
+ {% bootstrap_css %}
+    <html>
+        <head>
+            <body>
+                <form method ="post" class="form-group">
+                    {% csrf_token %}
+               <div class="row justify-content-md-center p-3 border">
+                <div class="col-md-2">
+                    Nom  <input type="text" name="nomo" >
+                </div>
+                <div class="col-md-2">
+                    Prénom <input type="text" name ="prenomo">
+                </div>
+                <div class="col-md-2">
+                    Age <input type="number" name="ageo">
+                    
+                </div>
+                <div class="col-md-1">
+                    Pays <select name="payso" class="form-group">
+                        <option value="Mali"> Mali </option>
+                        <option value="CI">CI </option>
+                        <option value="sénégal">Sénégal</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                <input  type="submit" value="envoyer">
+                </div>
+               </div>
+               </form>
+                
+                
+                
+                <h3>Affichage de la liste</h3>
+
+<a href="" class="btn btn-primary btn-sm">ajouter à</a>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom complet</th>
+            <th>E-Mail</th>
+            <th>âge</th>
+            <th>opération</th>
+        </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            <td>hhhhhh</td>
+            <td><a href="">ggggggggg</a></td>
+            <td>ddddddddddddddddddddddd</td>
+            <td>yyyyyyyyyyyyyyyyy</td>
+            <td>
+                <a href="" class="btn btn-primary btn-sm">Éditer</a>
+                <a href="" class="btn btn-primary btn-sm" id="btn_del">Effacer</a>
+            </td>
+        </tr>
+       
+    </tbody>
+</table>
+                
+                
+                 
+                
+            </body>
+        </head>
+    </html>

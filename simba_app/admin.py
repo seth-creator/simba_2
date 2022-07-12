@@ -5,7 +5,7 @@ from django.contrib import admin
 from leaflet.admin import LeafletGeoAdmin
 from django.contrib.auth.models import AbstractUser
 
-from .models import MonOffre, UserProfile, Service, Pharmacie, Hotel, Hopital, Ecole, Station, Banque, Commentaires, Notation
+from .models import MonOffre, UserProfile, Service, Pharmacie, Hotel, Hopital, Ecole, Station, Banque, Commentaires, Notation, Crud
 from mapbox_location_field.spatial.admin import SpatialMapAdmin
 from import_export.admin import ImportExportModelAdmin
 from .forms import BookResource
@@ -39,3 +39,4 @@ admin.site.register(Banque, PointAdmin)
 admin.site.register(Station, PointAdmin)
 admin.site.register(Commentaires)
 admin.site.register(Notation)
+admin.site.register(Crud)

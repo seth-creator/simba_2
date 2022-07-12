@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib import admin
 from django.urls import re_path as url
+from django.shortcuts import render, redirect
 #from . import views
 
 urlpatterns = [
@@ -25,20 +26,21 @@ from .views import AdViewSet, Buffer
 router = DefaultRouter()
 router.register(r'markers', AdViewSet, basename='marker')
 urlpatterns = router.urls
+#usa = request.user
 
 urlpatterns = [
-    path('profile/<int:pk>', views.edit_user, name='account_update'),
-    url(r'^profile/(?P<pk>[\-\w]+)/$', views.edit_user, name='account_update'),
-    #url(r'^profile/<int:pk>$', views.edit_user, name='account_update'),
+    #path('profile/<int:pk>', views.edit_user, name='account_update'),
+    #url(r'^profile/(?P<pk>[\-\w]+)/$', views.edit_user, name='account_update'),
+    url(r'^profile/<int:pk>$', views.edit_user, name='account_update'),
     #path('fournisseur/',admin.site.urls, name = 'fournisseur'),
     #path('accueil/',views.index),
-    path('formulaire/',views.formu, name = 'formulaire'),
+    
     path('',views.map, name = 'filter'),
     #path('filter',views.AdViewSet.bbox_filter_field, name = 'filter'),
     path('inscription/',inscripage, name = 'inscrit'),
-    path('inscription-agent/',inscripage2, name = 'inscrit2'),
-    #path('',accespage, name = 'acces'),
-    path('login-agent',accespage2, name = 'acces2'),
+    #path('inscription-agent/',inscripage2, name = 'inscrit2'),
+    path('login',accespage, name = 'acces'),
+    #path('login-agent',accespage2, name = 'acces2'),
     path('quitter/',lagoutuser, name = 'quitter'),
     path('produit/',views.gisfilter, name = 'produit'),
     url(r'^pagedetail(?P<id>\d+)/$', views.product_detail_view, name='detail'),
@@ -49,7 +51,7 @@ urlpatterns = [
     path('recherche/',views.BarFilter.as_view(), name = 'recherche'),
     #url(r'^accueil/$', TemplateView.as_view(template_name = 'simba/index2.html'), name = 'home'),
     url(r'^data/$', GeoJSONLayerView.as_view(model = LimQuart, properties = ('nom')), name = 'data'),
-    url(r'^datab/$', GeoJSONLayerView.as_view(model = Buffer, properties = ()), name = 'datab'),
+    url(r'^datab/$', GeoJSONLayerView.as_view(model = MonOffre.objects.filter(users__contains='babi'), properties = ()), name = 'datab'),
     url(r'^commune/$', GeoJSONLayerView.as_view(model = AdministrativeBoundary, properties = ('nom','identifiant')), name = 'commune'),
     url(
         r'^filtergeom/$',
@@ -74,7 +76,7 @@ urlpatterns = [
     url(r'^fastfood/$', GeoJSONLayerView.as_view(model = FastFood, properties = ('nom')), name = 'fastfood'),
     url(r'^fournimap/$', GeoJSONLayerView.as_view(model = UserProfile, properties = ('organization','phone', 'website', 'bio', 'city', 'country')), name = 'fournimap'),
     path('notes/',views.home,name='notes'),
-    path('tableau/',views.ticket_class_view,name='tableau'),
+    
     
 ]
 

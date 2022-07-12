@@ -35,6 +35,7 @@ urlpatterns = [
     #path('', include('simba_app.urls')),
     #url(r'^admin/', admin.site.urls),
     url(r'^', include('simba_app.urls')),
+    url(r'^crud/', include('simba_crud.urls')),
     path('users/', include(router.urls)),
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),

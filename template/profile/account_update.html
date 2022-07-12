@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+  {% load leaflet_tags %}
+  {% load crispy_forms_tags %}
+  {% load bootstrap5 %}
+  {% load mapbox_location_field_tags %} 
+  <head>
+    
+  {% location_field_includes %}
+
+  {% load material_form %}
+  {% leaflet_js %}
+  {% leaflet_css %}
+  {% leaflet_js plugins="forms" %}
+  {% leaflet_css plugins="forms" %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  {% bootstrap_messages %}
+  <script type = "text/javascript" src="{% static 'js/jquery-3.1.0.js' %}"></script>
+  </head>
+  <body>
+    {% include 'base/nav.html' %}
+  
+    <!-- Material form est juste une matérialisation pour les formulaires django --> 
+<!-- Material form is just a materialize thing for django forms -->
+<div class="col s12 m8 offset-m2">
+  <div class="card">
+    <div class="card-content">
+    <h2 class="flow-text">Update your information</h2>
+      <form action="." method="POST" class="padding">
+        {% csrf_token %} {{ noodle_form.as_p }}
+        <div class="divider"></div>
+        {{ formset.management_form }}
+            {{ formset.as_p }}
+        <button type="submit" class="btn-floating btn-large waves-light waves-effect"><i class="large material-icons">done</i></button>
+        <a href="#" onclick="window.history.back(); return false;" title="Cancel" class="btn-floating waves-effect waves-light red"><i class="material-icons">history</i></a>
+
+    </form>
+    </div>
+</div>
+</div>
+   
+
+{% for offre in offres %}
+
+{% endfor %}
+   
+{% include 'base/footer.html' %}
+  </body>
+</html>

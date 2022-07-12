@@ -229,7 +229,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <ul>
 <div class="card w-75">
   <div class ="container"><div class="card-body">
-    <h5 class="card-title">{{note.user}}</h5>
+    <h5 class="card-title">{{note.nom}}</h5>
     <p class="card-text">{{note.text}}</p>
   </div></div>
 </div>
@@ -244,11 +244,16 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
   
   
-<div class ="container">
+<div class ="container form-group">
    <form  method="post">
     {% csrf_token %}
-    <textarea class="form-control" id="commento" name = "commento" rows="3"></textarea>
-    <input type="submit" value="Publier">
+    <div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Commentaire</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" id="commento" name = "commento"></textarea>
+</div>
+     <div class="mb-3"><label class="form-label" for="id_nomo" > Nom</label>
+    <input class="form-control" id="nomo" type="text" name="nomo" placeholder="Entrer votre nom"></div>
+    <input class="btn btn-primary" type="submit" value="Publier">
   </form>
 </div>
 
@@ -256,29 +261,36 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <div class ="container">
  <form method="post">
   {% csrf_token %}
-    <label for="id_note_note">note: </label>
-    <input id="id_note_note" type="text" name="note_note" value="">
+  
+   <div class="mb-3" class="form-group">
+    <label for="exampleFormControlSelect1">Note</label>
+    <select class="form-control" id="id_note_note" type="text" name="note_note">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+      <option>10</option>
+    </select>
+  </div>
+
+  
     <!--label for="id_note_note" name ="note_note" class="form-label">Example range</label>
 <input type="range" class="form-range" id="id_note_note"-->
-    <input type="submit" value="OK">
+    <input class="btn btn-primary" type="submit" value="Publier">
 </form>
 </div>
    
 
- 
- 
- 
- 
- 
- 
-
-
-
 
 <div class="container">
-  <div class="row row-cols-3">
+  <div class="btn-group col-md-12" role="group">
     <div class="col">
-      <a href="/user{{product.fournisseur.id}}" class="btn btn-link"><button type="button" class="btn btn-secondary btn-sm">Voir le profil du fournisseur</button</a>
+      <a href="/user{{product.fournisseur.id}}" class="btn btn-link"><button type="button" class="btn btn-secondary btn-sm">Voir le profil</button</a>
     </div>
     <div class="col">
        <button type="button" class="btn btn-secondary btn-sm"><a href = "{% url 'contact' %}">Envoyer un mail</a></button>
@@ -290,7 +302,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </div>
 
 <div class="container">
-  <div class="row row-cols-3">
+  <div class="btn-group" role="group">
     
     <div class="col"><span  class="fb-share-button" 
 data-href="" 

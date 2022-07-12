@@ -1,0 +1,32 @@
+{% load static %}
+{% load bootstrap5 %}
+ {% bootstrap_css %}
+ <html>
+ <nav class="navbar navbar-expand-sm bg-primary text-white navbar-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="{% url 'filter' %}"><img src="{%static 'images/favicon.ico'%}" alt="" width="30" height="24" class="d-inline-block align-text-top">Simba</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'tableau' %}">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'index' %}">Gestion de Données</a>
+        </li>
+        
+      </ul>
+      </div>
+    
+    
+    
+  </div>
+  <div class="row navbar-nav">
+        <div class="col-md-2 ">Bonjour, {{request.user}}</div>
+        <div class="col-md-2 "><a class="nav-link"  href = "{% url 'quitter' %}"></a></div>
+        <div class="col-md-2 "><a class="nav-link text-white"  href = "{% url 'quitter' %}">Deconnexion</a></div>
+  </div>
+</nav>
+ </html>

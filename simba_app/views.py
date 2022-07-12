@@ -69,13 +69,18 @@ class Buffer(models.Model) :
     qs = MonOffre.objects.filter(geom__distance_lte=(pnt, D(km=15)))
 
 #formulaire
-@login_required(login_url = 'acces')
-def formu(request) :
+#@login_required(login_url = 'acces')
+def formu(request, id = None ) :
+        if id :
+            bien = get_object_or_404(MonOffre, pk = id)
+        else :
+            bien = MonOffre()
         if request.method == 'POST':
-            form = MonOffreForm(request.POST, request.FILES)
+            form = MonOffreForm(request.POST, request.FILES, instance = bien)
         #form = MonOffreForm(request.POST)
             if form.is_valid():
-                form.save()
+                bien = form.save(commit =False)
+                bien.save()
             #text = form.cleaned_data['post']
            
                 return redirect('filter')
@@ -83,7 +88,7 @@ def formu(request) :
              form = MonOffreForm()
             
         args = {'form': form}   
-        return render(request,'simba/form.html', args)
+        return render(request,'simba/form.html', dict(form=form, id=id))
 
 
 # convertir en geojson
@@ -143,7 +148,7 @@ def product_detail_view(request, id=None):
     form = ""
     if request.method == 'POST':
         try :
-            form = Commentaires.objects.create(text = request.POST['commento'], user = request.user, offre = MonOffre.objects.get(id =id))
+            form = Commentaires.objects.create(text = request.POST['commento'], nom = request.POST['nomo'], offre = MonOffre.objects.get(id =id))
         except MultiValueDictKeyError :
             form =0
             #if form.is_valid():
@@ -234,9 +239,9 @@ class LocationList(ListCreateAPIView):
     else:
         raise PermissionDenied"""
 
-def edit_user(request, pk):
+def edit_user(request, id=None):
     # querying the User object with pk from url
-    user = User.objects.get(pk=pk)
+    user = User.objects.get(id = id)
 
     # prepopulate UserProfileForm with retrieved user values from above.
     user_form = UserForm(instance=user)

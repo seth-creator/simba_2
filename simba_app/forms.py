@@ -18,7 +18,7 @@ class MonOffreForm(forms.ModelForm):
 
     class Meta:
         model = MonOffre
-        fields = ('statut','types','piece','superficie','tarif', 'commune','image', 'image2','image3','video', 'document', 'commentaire', 'agence','description','contact' ,'email','date','geom' )
+        fields = ('statut','types','piece','superficie','tarif', 'commune','quartier','image', 'image2','image3','video', 'document', 'commentaire', 'agence','description','contact' ,'email','date','geom' )
         """widgets = {'geom': LeafletWidget(attrs={
             'settings_overrides': {
             'DEFAULT_CENTER': (5.39460 , -3.97684),
@@ -80,7 +80,7 @@ class BookResource(resources.ModelResource):
 class NoteForm(forms.ModelForm):
     class Meta :
         model = Commentaires
-        fields= ['text','user','offre']
+        fields= ['text','offre']
         
 class NotationForm(forms.Form):
     note_note = forms.CharField(widget=forms.Textarea)

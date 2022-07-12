@@ -10,7 +10,7 @@
   @media (min-width: 768px) {
     .leaflet-sidebar {
       top: 10px;
-      bottom: 10px;
+      bottom: 200px;
       transition: width 500ms; } }
   @media (min-width: 768px) and (max-width: 991px) {
     .leaflet-sidebar {
@@ -41,7 +41,7 @@
   top: 0;
   bottom: 0;
   height: 100%;
-  background-color: #fff; }
+  background-color: rgba(0, 0, 0, 0.75); }
   .leaflet-sidebar-left .leaflet-sidebar-tabs {
     left: 0; }
   .leaflet-sidebar-right .leaflet-sidebar-tabs {
@@ -87,7 +87,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.75);
   overflow-x: hidden;
   overflow-y: auto; }
   .leaflet-sidebar-left .leaflet-sidebar-content {
@@ -127,7 +127,7 @@
   line-height: 40px;
   font-size: 14.4pt;
   color: #fff;
-  background-color: #008b8b; }
+  background-color: rgba(255,99,71,0.75);}
   .leaflet-sidebar-right .leaflet-sidebar-header {
     padding-left: 40px; }
 
